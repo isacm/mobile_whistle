@@ -7,7 +7,7 @@ export default class LotsOfStyles extends Component {
     this.state = {text: ''};
   }
   _onPressButton() {
-    Alert.alert('You tapped the button!')
+    Alert.alert('Wrong password!')
   }
 
   render() {
