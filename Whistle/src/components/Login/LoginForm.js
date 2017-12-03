@@ -40,12 +40,12 @@ export default class LoginForm extends Component {
 
 const styles = StyleSheet.create({
     container: {
-       marginTop: '30%'
+       marginTop: '10%'
     },
 
     textInputSection: {
         width: '100%',
-        height: '15%',
+        padding: '5%',
         alignItems: 'center',
         textAlign: 'center',
         opacity: 0.8,
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
 
     password: {
         textAlign: 'center',
-        marginTop: '15%',
+        marginTop: '10%',
         opacity: 0.8
     }
 

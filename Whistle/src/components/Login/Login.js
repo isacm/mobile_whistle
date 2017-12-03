@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View, TextInput, Button, TouchableHighlight, Alert } from 'react-native';
+import { AppRegistry, StyleSheet, Text, View, Image, TextInput, Button, TouchableHighlight, Alert } from 'react-native';
 import LoginForm from './LoginForm';
 
 export default class Login extends Component {
@@ -15,6 +15,8 @@ export default class Login extends Component {
     return ( 
       <View style={styles.container}>
       		<Text style={styles.title}>Whistle</Text>
+
+            <Image style={styles.logo} source={require('../../images/whistle_logo.png')}/>
 {/*  
       		<TextInput
       			style={styles.textInputSection}
@@ -57,11 +59,17 @@ const styles = StyleSheet.create({
     padding: '20%'
   },
 
+  logo: {
+    width:100,
+    height:100,
+    backgroundColor: 'transparent'
+  },
+
   textInputSection: {
   	width: '70%',
   	alignItems: 'center',
   	textAlign: 'center',
-  	padding: 15,
+  	marginTop: '20%',
   	alignSelf: 'center'
   },
 
