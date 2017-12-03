@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, View, TextInput, Button, TouchableHighlight, Alert } from 'react-native';
+import Login from './src/components/Login/Login';
 
 export default class LotsOfStyles extends Component {
   constructor(props) {
@@ -13,8 +14,8 @@ export default class LotsOfStyles extends Component {
   render() {
     return ( 
       <View style={styles.container}>
-      		<Text style={styles.yellow}>Whistle</Text>
-
+      		<Text style={styles.title}>Whistle</Text>
+{/*  
       		<TextInput
       			style={styles.textInputSection}
           		placeholder="Username"
@@ -32,6 +33,7 @@ export default class LotsOfStyles extends Component {
             		<Text style={styles.buttonText}>Login</Text>
           		</View>
           	</TouchableHighlight>
+*/}
 
       </View>
     );
@@ -40,12 +42,14 @@ export default class LotsOfStyles extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center'
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#3498db'
   },
 
-  yellow: {
+  title: {
   	textAlign: 'center',
-    color: 'yellow',
+    color: '#2c3e50',
     fontWeight: 'bold',
     fontSize: 40,
     padding: 100
@@ -85,4 +89,4 @@ const styles = StyleSheet.create({
 
 
 // skip this line if using Create React Native App
-AppRegistry.registerComponent('AwesomeProject', () => LotsOfStyles);
+AppRegistry.registerComponent('Whistle', () => Login);
