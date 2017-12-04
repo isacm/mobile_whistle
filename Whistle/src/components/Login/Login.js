@@ -16,7 +16,7 @@ export default class Login extends Component {
       <View style={styles.container}>
       		<Text style={styles.title}>Whistle</Text>
 
-            <Image style={styles.logo} source={require('../../images/whistle_logo.png')}/>
+            <Image style={styles.logo} source={require('../../images/whistle_logo_red.png')}/>
 {/*  
       		<TextInput
       			style={styles.textInputSection}
