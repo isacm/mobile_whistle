@@ -24,7 +24,7 @@ export default class LoginForm extends Component {
                 placeholder="Password"
                 onChangeText={(text) => this.setState({text})}
             />
-            <View>
+            <View style={styles.buttonView}>
                 <TouchableHighlight onPress={this._onPressButton} underlayColor="white">
                     <View style={styles.button}>
                         <Text style={styles.buttonText}>LOGIN</Text>
@@ -48,23 +48,20 @@ const styles = StyleSheet.create({
         padding: '5%',
         alignItems: 'center',
         textAlign: 'center',
-        opacity: 0.8,
         alignSelf: 'center'
     },
   
-    loginButtonSection: {
-        width: '100%',
-        justifyContent: 'center',
-        alignItems: 'center'
+    buttonView: {
+        marginTop:'20%'
     },
   
     button: {
-      marginTop: '20%',
       width: '100%',
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: '#34495e',
-      paddingHorizontal: 100
+      paddingHorizontal: 100,
+      
     },
   
     buttonText: {
