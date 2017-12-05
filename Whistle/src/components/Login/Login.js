@@ -14,9 +14,9 @@ export default class Login extends Component {
   render() {
     return ( 
       <View style={styles.container}>
-      		<Text style={styles.title}>Whistle</Text>
+      	
 
-            <Image style={styles.logo} source={require('../../images/whistle_logo_red.png')}/>
+            <Image style={styles.logo} source={require('../../images/simplelogowithtext.png')}/>
 {/*  
       		<TextInput
       			style={styles.textInputSection}
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#3498db'
+    backgroundColor: '#007F12'
   },
 
   title: {
@@ -60,8 +60,10 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-    width:100,
-    height:100,
+    marginTop: '20%',
+    flex: 1,
+    aspectRatio: 1, 
+    resizeMode: 'contain',
     backgroundColor: 'transparent'
   },
 
@@ -69,7 +71,7 @@ const styles = StyleSheet.create({
   	width: '70%',
   	alignItems: 'center',
   	textAlign: 'center',
-  	marginTop: '20%',
+  	marginTop: '10%',
   	alignSelf: 'center'
   },
 
