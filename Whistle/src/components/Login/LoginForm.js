@@ -14,18 +14,21 @@ export default class LoginForm extends Component {
   render() {
     return ( 
         <View style={styles.container}>
-            <TextInput
-            style={styles.textInputSection}
-            placeholder="USERNAME"
-            onChangeText={(text) => this.setState({text})}
-            />
-
-            <TextInput 
+            <View>
+                <TextInput
                 style={styles.textInputSection}
-                secureTextEntry={true}
-                placeholder="PASSWORD"
+                placeholder="USERNAME"
                 onChangeText={(text) => this.setState({text})}
-            />
+                />
+
+                <TextInput 
+                    style={styles.textInputSection}
+                    secureTextEntry={true}
+                    placeholder="PASSWORD"
+                    onChangeText={(text) => this.setState({text})}
+                />
+                </View>
+
             <View style={styles.buttonView}>
                 <TouchableHighlight onPress={this._onPressButton} underlayColor="white">
                     <View style={styles.button}>
@@ -53,24 +56,25 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         alignSelf: 'center',
         backgroundColor: 'rgba(255,255,255,0.3)',
-        borderRadius: 25
+        borderRadius: 10
     },
   
     buttonView: {
-        marginTop:'10%'
+        marginTop:'15%',
+        alignItems:'center'
     },
   
     button: {
-      width: '100%',
-      borderRadius: 25,
-      alignItems: 'center',
+      borderRadius: 10,
       justifyContent: 'center',
       backgroundColor: '#FFFFFF',
-      paddingHorizontal: 100
+      paddingHorizontal: '30%',
+      width:'50%',
       
     },
   
     buttonText: {
+      textAlign: 'center',
       padding: 10,
       fontSize: 20,
       fontWeight: 'bold',
