@@ -14,9 +14,8 @@ export default class Login extends Component {
   render() {
     return ( 
       <View style={styles.container}>
-      		<Text style={styles.title}>Whistle</Text>
 
-            <Image style={styles.logo} source={require('../../images/whistle_logo.png')}/>
+            <Image style={styles.logo} source={require('../../images/whitetext.png')}/>
 {/*  
       		<TextInput
       			style={styles.textInputSection}
@@ -48,7 +47,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#3498db'
+    backgroundColor: '#2980b9'
   },
 
   title: {
@@ -60,41 +59,13 @@ const styles = StyleSheet.create({
   },
 
   logo: {
+    flex:1,
+    marginTop: '20%',
+    aspectRatio:1.2,
+    resizeMode: 'contain',
     width:100,
-    height:100,
-    backgroundColor: 'transparent'
-  },
-
-  textInputSection: {
-  	width: '70%',
-  	alignItems: 'center',
-  	textAlign: 'center',
-  	marginTop: '20%',
-  	alignSelf: 'center'
-  },
-
-  loginButtonSection: {
-      width: '100%',
-      height: '20%',
-      justifyContent: 'center',
-      alignItems: 'center'
-  },
-
-  button: {
-    marginBottom: 30,
-    marginTop: 20,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#2196F3'
-  },
-
-  buttonText: {
-    padding: 20,
-    fontSize: 20,
-    color: 'white'
+    height:100
   }
-
 })
 
 

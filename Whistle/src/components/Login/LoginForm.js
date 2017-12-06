@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, View, TextInput, Button, TouchableHighlight, Alert } from 'react-native';
+import { StackNavigator,} from 'react-navigation';
 
 export default class LoginForm extends Component {
   constructor(props) {
@@ -15,13 +16,14 @@ export default class LoginForm extends Component {
         <View style={styles.container}>
             <TextInput
             style={styles.textInputSection}
-            placeholder="Username"
+            placeholder="USERNAME"
             onChangeText={(text) => this.setState({text})}
             />
 
             <TextInput 
                 style={styles.textInputSection}
-                placeholder="Password"
+                secureTextEntry={true}
+                placeholder="PASSWORD"
                 onChangeText={(text) => this.setState({text})}
             />
             <View style={styles.buttonView}>
@@ -40,39 +42,45 @@ export default class LoginForm extends Component {
 
 const styles = StyleSheet.create({
     container: {
-       marginTop: '10%'
+       marginTop: '15%'
     },
 
     textInputSection: {
         width: '100%',
+        marginTop: '5%',
         padding: '5%',
         alignItems: 'center',
         textAlign: 'center',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        backgroundColor: 'rgba(255,255,255,0.3)',
+        borderRadius: 25
     },
   
     buttonView: {
-        marginTop:'20%'
+        marginTop:'10%'
     },
   
     button: {
       width: '100%',
+      borderRadius: 25,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: '#34495e',
-      paddingHorizontal: 100,
+      backgroundColor: '#FFFFFF',
+      paddingHorizontal: 100
       
     },
   
     buttonText: {
-      padding: 20,
+      padding: 10,
       fontSize: 20,
-      color: 'white'
+      fontWeight: 'bold',
+      color: '#2980b9',
+      opacity: 0.8
     },
 
     password: {
         textAlign: 'center',
-        marginTop: '10%',
+        marginTop: '20%',
         opacity: 0.8
     }
 
