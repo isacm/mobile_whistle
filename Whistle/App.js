@@ -8,7 +8,7 @@ export default class LotsOfStyles extends Component {
     this.state = {text: ''};
   }
   _onPressButton() {
-    Alert.alert('Wrong password!')
+    Alert.alert('Incorret Username or Password')
   }
 
   render() {
