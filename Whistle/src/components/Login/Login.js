@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View, Image, TextInput, Button, TouchableHighlight, Alert } from 'react-native';
+import { AppRegistry, StyleSheet, Text, View, Image, TextInput, Button, TouchableHighlight, Alert, KeyboardAvoidingView } from 'react-native';
 import LoginForm from './LoginForm';
 
 export default class Login extends Component {
@@ -13,7 +13,7 @@ export default class Login extends Component {
 
   render() {
     return ( 
-      <View style={styles.container}>
+      <KeyboardAvoidingView behavior="padding" style={styles.container}>
 
             <Image style={styles.logo} source={require('../../images/whitetext.png')}/>
 {/*  
@@ -38,7 +38,7 @@ export default class Login extends Component {
             <View>
                 <LoginForm/>
             </View>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -71,4 +71,4 @@ const styles = StyleSheet.create({
 
 
 // skip this line if using Create React Native App
-AppRegistry.registerComponent('AwesomeProject', () => Login);
+AppRegistry.registerComponent('Login', () => Login);
