@@ -27,7 +27,6 @@ import CalendarScreen from './CalendarScreen';
 });
 
   menuScreenNavigator.navigationOptions = {
-    title : "Menu"
   };
 
   export default menuScreenNavigator;

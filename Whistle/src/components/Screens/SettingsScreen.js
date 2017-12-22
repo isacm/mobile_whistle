@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, TextInput, Button, TouchableHighlight, Alert, T
 
 export default class SettingsScreen extends Component {
     static navigationOptions = {
+      title: 'Settings',
       tabBarLabel: 'Settings',
       tabBarIcon : ({tintColor}) => ( tintColor == 'white' ?
         <Image source={require('./ScreenImages/settings.png')}

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, View, Image, KeyboardAvoidingView,TextInput, Button, TouchableHighlight, Alert, TouchableOpacity  } from 'react-native';
-import LoginForm from './LoginForm';
 import { StackNavigator,} from 'react-navigation';
 import Menu from '../Screens/Menu';
+import SettingsScreen from '../Screens/SettingsScreen';
 
 export default class Login extends Component {
   static navigationOptions = {
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
 
 const navigator = StackNavigator ({
   Home: {screen: Login},
-  Menu: {screen: Menu}
+  Menu: {screen: Menu},
 })
 
 // skip this line if using Create React Native App
