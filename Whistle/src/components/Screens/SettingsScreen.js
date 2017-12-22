@@ -5,8 +5,11 @@ import { StyleSheet, Text, View, TextInput, Button, TouchableHighlight, Alert, T
 export default class SettingsScreen extends Component {
     static navigationOptions = {
       tabBarLabel: 'Settings',
-      tabBarIcon : ({tintColor}) => (
+      tabBarIcon : ({tintColor}) => ( tintColor == 'white' ?
         <Image source={require('./ScreenImages/settings.png')}
+                style={{width: 22, height: 22}}/>
+        :
+        <Image source={require('./ScreenImages/settingsdisabled.png')}
                 style={{width: 22, height: 22}}/>
       ),
       headerStyle: {

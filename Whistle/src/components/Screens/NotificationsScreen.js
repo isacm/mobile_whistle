@@ -5,8 +5,11 @@ import { StyleSheet, Text, View, TextInput, Button, TouchableHighlight, Alert, T
 export default class NotificationsScreen extends Component {
     static navigationOptions = {
       tabBarLabel: 'Notifications',
-      tabBarIcon : ({tintColor}) => (
+      tabBarIcon : ({tintColor}) => ( tintColor == 'white' ?
         <Image source={require('./ScreenImages/notifications.png')}
+                style={{width: 22, height: 22}}/>
+        :
+        <Image source={require('./ScreenImages/notificationsdisabled.png')}
                 style={{width: 22, height: 22}}/>
       ),
       headerStyle: {
