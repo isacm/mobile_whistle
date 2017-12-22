@@ -5,10 +5,12 @@ import { StackNavigator,} from 'react-navigation';
 export default class LoginForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {text: ''};
+    this.state = {username : '', password : ''};
   }
-  _onPressButton() {
-    Alert.alert('Wrong password!')
+  _onPressButton= () => {
+    const { username, password } = this.state;
+    if(username!='Jose')
+        Alert.alert('Wrong Username!')
   }
 
   render() {
@@ -18,14 +20,14 @@ export default class LoginForm extends Component {
                 <TextInput
                 style={styles.textInputSection}
                 placeholder="USERNAME"
-                onChangeText={(text) => this.setState({text})}
+                onChangeText={(username) => this.setState({username})}
                 />
 
                 <TextInput 
                     style={styles.textInputSection}
                     secureTextEntry={true}
                     placeholder="PASSWORD"
-                    onChangeText={(text) => this.setState({text})}
+                    onChangeText={(password) => this.setState({password})}
                 />
                 </View>
 
