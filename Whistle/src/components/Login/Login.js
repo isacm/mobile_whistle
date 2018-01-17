@@ -6,21 +6,21 @@ import SettingsScreen from '../Screens/SettingsScreen';
 
 export default class Login extends Component {
   static navigationOptions = {
-    title: 'Home',
+    title: '',
     headerStyle: {
-      backgroundColor : '#212121'
+      backgroundColor: '#FFCC00'
     },
     headerTitleStyle : {
-      color : '#fff',
+      color : '#000',
       textAlign : 'center'
     }
-  };
+};
   constructor(props) {
     super(props);
     this.state = {text: ''};
   } 
   _onPressButton() {
-    Alert.alert('Wrong password!')
+    Alert.alert('Wrong Username or Password')
   }
 
   render() {
@@ -28,7 +28,7 @@ export default class Login extends Component {
     return ( 
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
 
-            <Image style={styles.logo} source={require('../../images/whitetext.png')}/>
+            <Image style={styles.logo} source={require('../../images/blacktext.png')}/>
             
             <View style={styles.formContainer}>
               <View>
@@ -54,7 +54,6 @@ export default class Login extends Component {
                             <Text style={styles.buttonText}>LOGIN</Text>
                         </View>
                     </TouchableHighlight>
-
                     <Text style={styles.password}> Forgot your password? </Text>
                 </View>
             </View>
@@ -67,7 +66,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#2980b9'
+    backgroundColor: '#FFCC00'
   },
 
   title: {
@@ -81,8 +80,8 @@ const styles = StyleSheet.create({
   logo: {
     flex:1,
     marginTop: '20%',
-    aspectRatio:1.3,
-    resizeMode: 'contain'
+    aspectRatio:1.8,
+    resizeMode: 'cover'
   },
 
   formContainer: {
@@ -109,7 +108,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: '2%',
     justifyContent: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1a1a00',
     paddingHorizontal: '30%'
     
   },
@@ -119,7 +118,7 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#2980b9',
+    color: '#FFCC00',
     opacity: 0.8
   },
 

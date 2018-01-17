@@ -15,9 +15,9 @@ import CalendarScreen from './CalendarScreen';
       swipeEnabled : true,
       tabBarOptions: {
         activeTintColor : 'white',
-        inactiveTintColor : 'darkgrey',
-        activeBackgroundColor : '#2c3e50',
-        inactiveBackgroundColor : '#2c3e50',
+        inactiveTintColor : 'black',
+        activeBackgroundColor: '#000',
+        inactiveBackgroundColor: '#FFCC00',
         labelStyle: {
           fontSize : 14,
           padding: 0

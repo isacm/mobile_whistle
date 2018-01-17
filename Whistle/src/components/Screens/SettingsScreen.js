@@ -4,20 +4,21 @@ import { StyleSheet, Text, View, TextInput, Button, TouchableHighlight, Alert, T
 
 export default class SettingsScreen extends Component {
     static navigationOptions = {
-      title: 'Settings',
+      title: 'SETTINGS',
       tabBarLabel: 'Settings',
+      headerTintColor: 'black',
       tabBarIcon : ({tintColor}) => ( tintColor == 'white' ?
         <Image source={require('./ScreenImages/settings.png')}
                 style={{width: 22, height: 22}}/>
         :
-        <Image source={require('./ScreenImages/settingsdisabled.png')}
+        <Image source={require('./ScreenImages/inactivesettings.png')}
                 style={{width: 22, height: 22}}/>
       ),
       headerStyle: {
-        backgroundColor : '#212121'
+        backgroundColor: '#FFCC00'
       },
       headerTitleStyle : {
-        color : '#fff',
+        color : '#000',
         textAlign : 'center'
       }
     };
@@ -40,6 +41,6 @@ export default class SettingsScreen extends Component {
     container: {
       flex: 1,
       alignItems: 'center',
-      backgroundColor: '#2980b9'
+      backgroundColor: '#FFF'
     },
   })

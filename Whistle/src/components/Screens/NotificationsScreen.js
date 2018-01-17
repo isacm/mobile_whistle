@@ -4,20 +4,21 @@ import { StyleSheet, Text, View, TextInput, Button, TouchableHighlight, Alert, T
 
 export default class NotificationsScreen extends Component {
     static navigationOptions = {
-      title : 'Notifications',
+      title : 'NOTIFICATIONS',
       tabBarLabel: 'Notifications',
+      headerTintColor: 'black',
       tabBarIcon : ({tintColor}) => ( tintColor == 'white' ?
         <Image source={require('./ScreenImages/notifications.png')}
                 style={{width: 22, height: 22}}/>
         :
-        <Image source={require('./ScreenImages/notificationsdisabled.png')}
+        <Image source={require('./ScreenImages/inactivenotifications.png')}
                 style={{width: 22, height: 22}}/>
       ),
       headerStyle: {
-        backgroundColor : '#212121'
+        backgroundColor: '#FFCC00'
       },
       headerTitleStyle : {
-        color : '#fff',
+        color : '#000',
         textAlign : 'center'
       }
     };
@@ -40,5 +41,6 @@ export default class NotificationsScreen extends Component {
     container: {
       flex: 1,
       alignItems: 'center',
+      backgroundColor: '#FFF',
     },
   })
