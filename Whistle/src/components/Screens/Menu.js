@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { StackNavigator, TabNavigator} from 'react-navigation';
 import { StyleSheet, Text, View, TextInput, Button, TouchableHighlight, Alert, TouchableOpacity } from 'react-native';
-import SettingsScreen from './SettingsScreen';
 import NotificationsScreen from './NotificationsScreen';
 import CalendarScreen from './CalendarScreen';
+import ProfileScreen from './ProfileScreen';
+import SettingsScreen from './SettingsScreen';
 
   var menuScreenNavigator = TabNavigator({
-    Settings : { screen : SettingsScreen },
-    Notifications : { screen : NotificationsScreen},
-    Calendar : { screen : CalendarScreen},
+    Notifications : { screen : NotificationsScreen },
+    Calendar : { screen : CalendarScreen },
+    Profile : { screen : ProfileScreen },
+    Settings: { screen: SettingsScreen },
   },
     { 
       tabBarPosition : 'bottom',
