@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, View, Image, KeyboardAvoidingView,TextInput, Button, TouchableHighlight, Alert, TouchableOpacity  } from 'react-native';
-import { StackNavigator,} from 'react-navigation';
+import { StackNavigator, NavigationActions} from 'react-navigation';
 import Menu from '../Screens/Menu';
 import SettingsScreen from '../Screens/SettingsScreen';
 

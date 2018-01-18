@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { StackNavigator, TabNavigator} from 'react-navigation';
+import { StackNavigator, TabNavigator, NavigationActions} from 'react-navigation';
 import { StyleSheet, Text, View, TextInput, Button, TouchableHighlight, Alert, TouchableOpacity, Image } from 'react-native';
+import CalendarScreen from './CalendarScreen';
 
 export default class SettingsScreen extends Component {
     static navigationOptions = {
@@ -24,7 +25,8 @@ export default class SettingsScreen extends Component {
     };
     constructor(props) {
       super(props);
-      this.state = {text: ''};
+      this.state = {text: 'settings'};
+
     } 
   
     render() {
@@ -32,6 +34,7 @@ export default class SettingsScreen extends Component {
         <View style = {styles.container}>
             <Text There is a blue square
             />
+            
         </View>
       );
     }

@@ -1,23 +1,26 @@
 {
-	"name": "Whistle",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"test": "jest"
-	},
-	"dependencies": {
-		"react": "16.0.0",
-		"react-native": "0.50.3",
-		"react-navigation": "^1.0.0-beta.21"
-	},
-	"devDependencies": {
-		"babel-jest": "21.2.0",
-		"babel-preset-react-native": "4.0.0",
-		"jest": "21.2.1",
-		"react-test-renderer": "16.0.0"
-	},
-	"jest": {
-		"preset": "react-native"
-	}
+  "name": "Whistle",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "d3-interpolate": "^1.1.6",
+    "react": "16.0.0",
+    "react-content-loader": "^2.0.2",
+    "react-native": "0.50.3",
+    "react-native-svg": "^6.0.1-rc.2",
+    "react-navigation": "^1.0.0-beta.21"
+  },
+  "devDependencies": {
+    "babel-jest": "21.2.0",
+    "babel-preset-react-native": "4.0.0",
+    "jest": "21.2.1",
+    "react-test-renderer": "16.0.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
 }

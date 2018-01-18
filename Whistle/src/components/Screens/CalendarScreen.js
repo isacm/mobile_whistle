@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StackNavigator, TabNavigator} from 'react-navigation';
+import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
 import { StyleSheet, Text, View, TextInput, Button, TouchableHighlight, Alert, TouchableOpacity, Image } from 'react-native';
 
 export default class CalendarScreen extends Component {
@@ -24,7 +24,7 @@ export default class CalendarScreen extends Component {
   };
   constructor(props) {
     super(props);
-    this.state = { text: '' };
+    this.state = { text: 'calendar' };
   }
 
   render() {
@@ -36,6 +36,7 @@ export default class CalendarScreen extends Component {
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {

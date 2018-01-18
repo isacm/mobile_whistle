@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StackNavigator, TabNavigator} from 'react-navigation';
+import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
 import { StyleSheet, Text, View, TextInput, Button, TouchableHighlight, Alert, TouchableOpacity } from 'react-native';
 import NotificationsScreen from './NotificationsScreen';
 import CalendarScreen from './CalendarScreen';
@@ -27,6 +27,7 @@ import SettingsScreen from './SettingsScreen';
       }
       
 });
+
 
   menuScreenNavigator.navigationOptions = {
   };
