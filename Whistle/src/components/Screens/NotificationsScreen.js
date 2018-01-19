@@ -26,12 +26,16 @@ export default class NotificationsScreen extends Component {
     };
     constructor(props) {
       super(props);
-      this.state = {text: 'notifications'};
+      this.state = {text: 'notifications',
+                    loading: true };
     } 
   
     render() {
+
+      if(this.state.loading){
+
       return ( 
-        <ContentLoader primaryColor="grey"
+        <ContentLoader primaryColor="lightgrey"
           secondaryColor="darkgrey"
           duration={2100}
           height={2000}
@@ -62,7 +66,13 @@ export default class NotificationsScreen extends Component {
           <Rect x="75" y="455" rx="5" ry="4" width="290" height="12" />
 
         </ContentLoader>
-      );
+      )
+    }
+      return (
+      <View style={styles.container}>
+        <Text There is a blue square
+        />
+      </View>);
     }
   }
   
