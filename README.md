@@ -46,12 +46,12 @@ https://medium.com/handlebar-labs/how-to-add-a-splash-screen-to-a-react-native-a
 
 ```
 
-## Install to use calendar
+## Calendar Setup
 ```
 npm install --save react-native-calendars
 
 ```
-## Use icons from react native
+## Icons Setup
 ```
 npm install react-native-vector-icons --save
 react-native link
