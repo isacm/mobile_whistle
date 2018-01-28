@@ -18,7 +18,7 @@ import SettingsScreen from './SettingsScreen';
       tabBarOptions: {
         activeTintColor : 'white',
         inactiveTintColor : 'black',
-        activeBackgroundColor: '#000',
+        activeBackgroundColor: '#2b2b2b',
         inactiveBackgroundColor: '#FFCC00',
         labelStyle: {
           fontSize : 14,
