@@ -53,6 +53,6 @@ npm install --save react-native-calendars
 ```
 ## Icons Setup
 ```
-npm install react-native-vector-icons --save
-react-native link
+npm i react-native-vector-icons --save && react-native link react-native-vector-icons
+npm i react-native-elements --save
 ```
