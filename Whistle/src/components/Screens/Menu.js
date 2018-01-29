@@ -3,7 +3,7 @@ import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigatio
 import { StyleSheet, Text, View, TextInput, Button, TouchableHighlight, Alert, TouchableOpacity } from 'react-native';
 import NotificationsScreen from './NotificationsScreen';
 import CalendarScreen from './CalendarScreen';
-import ProfileScreen from './ProfileScreen';
+import ProfileScreen from './Profile/ProfileScreen';
 import SettingsScreen from './SettingsScreen';
 
   var menuScreenNavigator = TabNavigator({
