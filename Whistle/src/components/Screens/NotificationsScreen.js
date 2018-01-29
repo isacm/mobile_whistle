@@ -32,80 +32,137 @@ export default class NotificationsScreen extends Component {
                     loading: true };
     } 
   
-    _renderRow() {
-      return (
-        <ContentLoader primaryColor="lightgrey"
-            secondaryColor="darkgrey"
-            duration={2100}
-            height={2000}
-            width={600}>
-            <Rect x="10" y="10" rx="5" ry="5" width="60" height="65" />
-            <Rect x="75" y="15" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="35" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="55" rx="5" ry="4" width="290" height="12" />
-            <Rect x="10" y="90" rx="5" ry="5" width="60" height="65" />
-            <Rect x="75" y="95" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="115" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="135" rx="5" ry="4" width="290" height="12" />
-            <Rect x="10" y="170" rx="5" ry="5" width="60" height="65" />
-            <Rect x="75" y="175" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="195" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="215" rx="5" ry="4" width="290" height="12" />
-            <Rect x="10" y="250" rx="5" ry="5" width="60" height="65" />
-            <Rect x="75" y="255" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="275" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="295" rx="5" ry="4" width="290" height="12" />
-            <Rect x="10" y="330" rx="5" ry="5" width="60" height="65" />
-            <Rect x="75" y="335" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="355" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="375" rx="5" ry="4" width="290" height="12" />
-            <Rect x="10" y="410" rx="5" ry="5" width="60" height="65" />
-            <Rect x="75" y="415" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="435" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="455" rx="5" ry="4" width="290" height="12" />
-            <Rect x="10" y="330" rx="5" ry="5" width="60" height="65" />
-            <Rect x="75" y="335" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="355" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="375" rx="5" ry="4" width="290" height="12" />
-            <Rect x="10" y="10" rx="5" ry="5" width="60" height="65" />
-            <Rect x="75" y="15" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="35" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="55" rx="5" ry="4" width="290" height="12" />
-            <Rect x="10" y="90" rx="5" ry="5" width="60" height="65" />
-            <Rect x="75" y="95" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="115" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="135" rx="5" ry="4" width="290" height="12" />
-            <Rect x="10" y="170" rx="5" ry="5" width="60" height="65" />
-            <Rect x="75" y="175" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="195" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="215" rx="5" ry="4" width="290" height="12" />
-            <Rect x="10" y="250" rx="5" ry="5" width="60" height="65" />
-            <Rect x="75" y="255" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="275" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="295" rx="5" ry="4" width="290" height="12" />
-            <Rect x="10" y="330" rx="5" ry="5" width="60" height="65" />
-            <Rect x="75" y="335" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="355" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="375" rx="5" ry="4" width="290" height="12" />
-            <Rect x="10" y="410" rx="5" ry="5" width="60" height="65" />
-            <Rect x="75" y="415" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="435" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="455" rx="5" ry="4" width="290" height="12" />
-            <Rect x="10" y="330" rx="5" ry="5" width="60" height="65" />
-            <Rect x="75" y="335" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="355" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="375" rx="5" ry="4" width="290" height="12" />
-
-          </ContentLoader>
-      );
-}
+  
     render() {
 
       if(this.state.loading){
 
       return ( 
-        <ScrollView style={styles.container}> 
-            {this._renderRow()}
+        <ScrollView>
+        <Container style={styles.container}>
+          <Content>
+          <Card style={{flex:0}}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Settings')} underlayColor="white">
+                  <CardItem style={{backgroundColor: '#2b2b2b' }}>
+                    <Left>
+                      <Icon color= "white" name="md-information-circle" size={40} type="ionicon" />
+                      <Body>
+                        <Text style={styles.headerText}>12/02/2018</Text>
+                      </Body>
+                    </Left>
+                    <Right>
+                      <Icon color="white" name="chevron-thin-right" size={20} type = "entypo" />
+                    </Right>
+                  </CardItem>
+                  </TouchableOpacity>
+                  <CardItem style={{ backgroundColor: 'white'}}>
+                    <Body>
+                      <Text style={styles.noteText}>COMPETIÇÃO: CNS Série A</Text>
+                      <Text style ={styles.gameText}>
+                      VIANENSE FC - CANELAS FC
+                      </Text>
+                      <Text style={styles.noteText}>Campo Manuel Machado, Viana do Castelo</Text>
+                    </Body>
+                  </CardItem>
+            </Card>
+            <Card style={{flex:0}}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('Settings')} underlayColor="white">
+                    <CardItem style={{backgroundColor: '#2b2b2b' }}>
+                      <Left>
+                        <Icon color= "white" name="md-information-circle" size={40} type="ionicon" />
+                        <Body>
+                          <Text style={styles.headerText}>12/02/2018</Text>
+                        </Body>
+                      </Left>
+                      <Right>
+                        <Icon color="white" name="chevron-thin-right" size={20} type = "entypo" />
+                      </Right>
+                    </CardItem>
+                    </TouchableOpacity>
+                    <CardItem style={{ backgroundColor: 'white'}}>
+                      <Body>
+                        <Text style={styles.noteText}>COMPETIÇÃO: CNS Série A</Text>
+                        <Text style ={styles.gameText}>
+                        VIANENSE FC - CANELAS FC
+                        </Text>
+                        <Text style={styles.noteText}>Campo Manuel Machado, Viana do Castelo</Text>
+                      </Body>
+                    </CardItem>
+            </Card>
+            <Card style={{flex:0}}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('Settings')} underlayColor="white">
+                    <CardItem style={{backgroundColor: '#2b2b2b' }}>
+                      <Left>
+                        <Icon color= "white" name="md-information-circle" size={40} type="ionicon" />
+                        <Body>
+                          <Text style={styles.headerText}>12/02/2018</Text>
+                        </Body>
+                      </Left>
+                      <Right>
+                        <Icon color="white" name="chevron-thin-right" size={20} type = "entypo" />
+                      </Right>
+                    </CardItem>
+                    </TouchableOpacity>
+                    <CardItem style={{ backgroundColor: 'white'}}>
+                      <Body>
+                        <Text style={styles.noteText}>COMPETIÇÃO: CNS Série A</Text>
+                        <Text style ={styles.gameText}>
+                        VIANENSE FC - CANELAS FC
+                        </Text>
+                        <Text style={styles.noteText}>Campo Manuel Machado, Viana do Castelo</Text>
+                      </Body>
+                    </CardItem>
+            </Card>
+            <Card style={{flex:0}}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('Settings')} underlayColor="white">
+                    <CardItem style={{backgroundColor: '#2b2b2b' }}>
+                      <Left>
+                        <Icon color= "white" name="md-information-circle" size={40} type="ionicon" />
+                        <Body>
+                          <Text style={styles.headerText}>12/02/2018</Text>
+                        </Body>
+                      </Left>
+                      <Right>
+                        <Icon color="white" name="chevron-thin-right" size={20} type = "entypo" />
+                      </Right>
+                    </CardItem>
+                    </TouchableOpacity>
+                    <CardItem style={{ backgroundColor: 'white'}}>
+                      <Body>
+                        <Text style={styles.noteText}>COMPETIÇÃO: CNS Série A</Text>
+                        <Text style ={styles.gameText}>
+                        VIANENSE FC - CANELAS FC
+                        </Text>
+                        <Text style={styles.noteText}>Campo Manuel Machado, Viana do Castelo</Text>
+                      </Body>
+                    </CardItem>
+            </Card>
+            <Card style={{flex:0}}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('Settings')} underlayColor="white">
+                    <CardItem style={{backgroundColor: '#2b2b2b' }}>
+                      <Left>
+                        <Icon color= "white" name="md-information-circle" size={40} type="ionicon" />
+                        <Body>
+                          <Text style={styles.headerText}>12/02/2018</Text>
+                        </Body>
+                      </Left>
+                      <Right>
+                        <Icon color="white" name="chevron-thin-right" size={20} type = "entypo" />
+                      </Right>
+                    </CardItem>
+                    </TouchableOpacity>
+                    <CardItem style={{ backgroundColor: 'white'}}>
+                      <Body>
+                        <Text style={styles.noteText}>COMPETIÇÃO: CNS Série A</Text>
+                        <Text style ={styles.gameText}>
+                        VIANENSE FC - CANELAS FC
+                        </Text>
+                        <Text style={styles.noteText}>Campo Manuel Machado, Viana do Castelo</Text>
+                      </Body>
+                    </CardItem>
+            </Card>
+            </Content>
+        </Container>
         </ScrollView>
       )
     }
@@ -115,6 +172,23 @@ export default class NotificationsScreen extends Component {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#1a1a1a'
+      backgroundColor: '#1a1a1a',
     },
+    headerText: {
+      fontSize: 15,
+      color :"white",
+      fontWeight: 'bold',
+    },
+    gameText : {
+      fontSize: 23,
+      fontWeight: 'bold',
+      color: "#2b2b2b",
+      alignItems: 'center'
+    },
+     noteText: {
+      fontSize: 13,
+      fontWeight: 'bold',
+       color: "#2b2b2b",
+      alignItems: 'center'
+    }
   })

@@ -15,6 +15,7 @@ import {
 
 import Tel from './Tel'
 import Email from './Email'
+import Separator from './Separator'
 
 export default class ProfileScreen extends Component {
     static navigationOptions = {
@@ -126,6 +127,7 @@ export default class ProfileScreen extends Component {
               <Card containerStyle={styles.cardContainer}>
               {this.renderTel()}
               </Card>
+              {this.Separator}
               <Card containerStyle={styles.cardContainer}>
               {this.renderEmail()}
               </Card>
