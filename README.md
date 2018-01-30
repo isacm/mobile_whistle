@@ -78,7 +78,7 @@ react-native link
 npm install --save react-native-maps-google
 ```
 
-### Setup IOS
+#### Setup IOS
 ```
 1. Go get yourself a cup of coffee, this could take a while...
 2. Open up your React Native project in XCode, this is the .xcodeproj file in the ios directory of your React Native project.
@@ -93,7 +93,7 @@ npm install --save react-native-maps-google
 11. Hit Cmd+R and make sure the app runs!
 ```
 
-### Setup Android
+#### Setup Android
 ```
 1. Open up your React Native project in Android Studio, this is the android directory in your React Native project.
 2. Expand Gradle Scripts from within the project tree and open settings.gradle. Replace the line in the script which states include ':app' with include ':app', ':pptmapview' (or append ':pptmapview' to the end of the include statement if you're already including other modules).
