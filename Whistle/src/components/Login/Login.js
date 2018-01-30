@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View, Image, KeyboardAvoidingView,TextInput, Button, TouchableHighlight, Alert, TouchableOpacity  } from 'react-native';
+import { AppRegistry, StyleSheet, AppState, Text, View, Image, KeyboardAvoidingView,TextInput, Button, TouchableHighlight, Alert, TouchableOpacity  } from 'react-native';
 import { StackNavigator, NavigationActions} from 'react-navigation';
 import Menu from '../Screens/Menu';
 import Account from '../Screens/Settings/Account';
@@ -8,9 +8,11 @@ import About from '../Screens/Settings/About';
 import Contacts from '../Screens/Settings/Contacts';
 import Help from '../Screens/Settings/Help';
 import NotificationDetail from '../Screens/NotificationDetail';
-import SelectedProfile from '../Screens/Profile/SelectedProfile'
-
+import SelectedProfile from '../Screens/Profile/SelectedProfile';
+import PushController from '../PushController'
 import SettingsScreen from '../Screens/SettingsScreen';
+
+import PushNotification from 'react-native-push-notification';
 
 export default class Login extends Component {
   static navigationOptions = {
@@ -25,10 +27,32 @@ export default class Login extends Component {
 };
   constructor(props) {
     super(props);
-    this.state = {text: ''};
+    this.state = {text: '', seconds:5};
   } 
   _onPressButton() {
     Alert.alert('Wrong Username or Password')
+  }
+
+  componentDidMount(){
+    AppState.addEventListener('change', this._handleAppStateChange);
+
+  }
+
+  componentWillMount(){
+    AppState.removeEventListener('change', this._handleAppStateChange);
+  }
+
+  _handleAppStateChange = (nextAppState) => {
+    if(AppState === 'background'){
+      PushNotification.localNotificationSchedule({
+        message: "My Notification Message", // (required)
+        date: new Date(Date.now() + (this.state.seconds * 1000)) // in 60 secs
+      });
+    }
+    {/*if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+      console.log('App has come to the foreground!')
+    }
+  this.setState({appState: nextAppState});*/}
   }
 
   render() {
@@ -65,7 +89,9 @@ export default class Login extends Component {
                     <Text style={styles.password}> Forgot your password? </Text>
                 </View>
             </View>
+            <PushController />
       </KeyboardAvoidingView>
+      
     );
   }
 }
