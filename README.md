@@ -62,3 +62,8 @@ npm install native-base --save
 react-native link
 ```
 
+## RadioButton setup
+```
+npm i react-native-simple-radio-button --save
+```
+
