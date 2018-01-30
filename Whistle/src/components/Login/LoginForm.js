@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View, TextInput, Button, TouchableHighlight, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, TouchableHighlight, Alert, TouchableOpacity } from 'react-native';
 import { StackNavigator,} from 'react-navigation';
 
 export default class LoginForm extends Component {
@@ -15,22 +15,24 @@ export default class LoginForm extends Component {
     return ( 
         <View style={styles.container}>
             <View>
-                <TextInput
+                <TextInput underlineColorAndroid='transparent'
                 style={styles.textInputSection}
                 placeholder="USERNAME"
+                returnKeyType="next"
                 onChangeText={(text) => this.setState({text})}
                 />
 
-                <TextInput 
+                <TextInput underlineColorAndroid='transparent'
                     style={styles.textInputSection}
                     secureTextEntry={true}
                     placeholder="PASSWORD"
+                    returnKeyType="done"
                     onChangeText={(text) => this.setState({text})}
                 />
                 </View>
 
             <View style={styles.buttonView}>
-                <TouchableHighlight onPress={this._onPressButton} underlayColor="white">
+                <TouchableHighlight onPress={() => this.props.navigation.navigate('Menu')} underlayColor="white">
                     <View style={styles.button}>
                         <Text style={styles.buttonText}>LOGIN</Text>
                     </View>
@@ -45,7 +47,7 @@ export default class LoginForm extends Component {
 
 const styles = StyleSheet.create({
     container: {
-       marginTop: '15%'
+       marginTop: '10%'
     },
 
     textInputSection: {
@@ -66,10 +68,10 @@ const styles = StyleSheet.create({
   
     button: {
       borderRadius: 10,
+      padding: '2%',
       justifyContent: 'center',
       backgroundColor: '#FFFFFF',
-      paddingHorizontal: '30%',
-      width:'50%',
+      paddingHorizontal: '30%'
       
     },
   
@@ -84,7 +86,7 @@ const styles = StyleSheet.create({
 
     password: {
         textAlign: 'center',
-        marginTop: '20%',
+        marginTop: '10%',
         opacity: 0.8
     }
 
