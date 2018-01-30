@@ -79,10 +79,10 @@ npm install --save react-native-maps-google
 ```
 
 ### Setup IOS
-```
-Go get yourself a cup of coffee, this could take a while...
-Open up your React Native project in XCode, this is the .xcodeproj file in the ios directory of your React Native project.
-Click on the root of your project in XCode, then select your project's main target. Select Build Settings and then search for Framework Search Paths. Add $(PROJECT_DIR)/../node_modules/react-native-maps-google/ios_modules/GoogleMaps-1.11.1/Frameworks to the framework search path list and make sure it is set to recursive.
+
+1. Go get yourself a cup of coffee, this could take a while...
+2. Open up your React Native project in XCode, this is the .xcodeproj file in the ios directory of your React Native project.
+3. Click on the root of your project in XCode, then select your project's main target. Select Build Settings and then search for Framework Search Paths. Add $(PROJECT_DIR)/../node_modules/react-native-maps-google/ios_modules/GoogleMaps-1.11.1/Frameworks to the framework search path list and make sure it is set to recursive.
 Now search for Header Search Paths. Add $(SRCROOT)/../node_modules/react-native-maps-google to the header search path list and make sure that it is also set to recursive.
 Open node_modules/react-native-maps-google/ios in Finder and locate the PPTMapView.xcodeproj package. Drag this file into the XCode project navigator. You can keep this in the Libraries group along with all the other React Native packages.
 Expand the PPTMapView.xcodeproj tree and select GoogleMapsApi.plist - drag this into the group which contains your AppDelegate.h and AppDelegate.m files; this group is usually named after your app. When prompted ensure that Copy Items if Needed is deselected when prompted, this will prevent this file from being committed into source control. Open up the file and enter your Google API key into the value column of the row named API Key.
@@ -91,7 +91,7 @@ Select the Google Maps SDK group in PPTMapView.xcodeproj, drag these packages in
 Click on the root of your project in XCode, then select your project's main target. Click on Build Phases and double check that all the libraries and frameworks were automatically added to the Link Binary With Libraries phase. If they weren't, select all the packages in the Google Maps SDK group (apart from GoogleMaps.bundle) and drag them into this build phase.
 At the bottom of the Link Binary With Libraries list, click the + button and search for libPPTMapView.a (it should be in the Workspace folder). Select libPPTMapView.a and click the Add button. Scroll back up to the top of the list and double check that it was added.
 Hit Cmd+R and make sure the app runs!
-```
+
 
 ### Setup Android
 ```
