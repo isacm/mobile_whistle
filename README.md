@@ -43,3 +43,27 @@ ticons.fokkezb.nl
 • Android Setup
 
 https://medium.com/handlebar-labs/how-to-add-a-splash-screen-to-a-react-native-app-ios-and-android-30a3cec835ae
+
+```
+
+## Calendar Setup
+```
+npm install --save react-native-calendars
+
+```
+## Icons Setup
+```
+npm i react-native-vector-icons --save && react-native link react-native-vector-icons
+npm i react-native-elements --save
+```
+## NativeBase Setup
+```
+npm install native-base --save
+react-native link
+```
+
+## RadioButton setup
+```
+npm i react-native-simple-radio-button --save
+```
+
