@@ -7,6 +7,8 @@ import Notifications from '../Screens/Settings/Notifications';
 import About from '../Screens/Settings/About';
 import Contacts from '../Screens/Settings/Contacts';
 import Help from '../Screens/Settings/Help';
+import NotificationDetail from '../Screens/NotificationDetail';
+import SelectedProfile from '../Screens/Profile/SelectedProfile'
 
 import SettingsScreen from '../Screens/SettingsScreen';
 
@@ -142,7 +144,9 @@ const navigator = StackNavigator ({
   Help: {screen: Help},
   Contacts: {screen: Contacts},
   Notifications: {screen: Notifications},
-  About: {screen: About}
+  About: {screen: About},
+  NotificationDetail:{screen: NotificationDetail},
+  SelectedProfile: {screen: SelectedProfile}
 })
 
 // skip this line if using Create React Native App
