@@ -8,7 +8,7 @@ import { Circle, Rect } from 'react-native-svg';
 
 export default class NotificationsScreen extends Component {
     static navigationOptions = {
-      title : 'NOTIFICATIONS',
+      title : 'Notifications',
       tabBarLabel: 'Notifications',
       headerTintColor: 'black',
       tabBarIcon : ({tintColor}) => ( tintColor == 'white' ?
@@ -42,7 +42,7 @@ export default class NotificationsScreen extends Component {
         <Container style={styles.container}>
           <Content>
           <Card style={{flex:0}}>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('Settings')} underlayColor="white">
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Settings')} underlayColor="#DCDCDC">
                   <CardItem style={{backgroundColor: '#2b2b2b' }}>
                     <Left>
                       <Icon color= "white" name="md-information-circle" size={40} type="ionicon" />
@@ -66,7 +66,7 @@ export default class NotificationsScreen extends Component {
                   </CardItem>
             </Card>
             <Card style={{flex:0}}>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('Settings')} underlayColor="white">
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('Settings')} underlayColor="#DCDCDC">
                     <CardItem style={{backgroundColor: '#2b2b2b' }}>
                       <Left>
                         <Icon color= "white" name="md-information-circle" size={40} type="ionicon" />
@@ -90,7 +90,7 @@ export default class NotificationsScreen extends Component {
                     </CardItem>
             </Card>
             <Card style={{flex:0}}>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('Settings')} underlayColor="white">
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('Settings')} underlayColor="#DCDCDC">
                     <CardItem style={{backgroundColor: '#2b2b2b' }}>
                       <Left>
                         <Icon color= "white" name="md-information-circle" size={40} type="ionicon" />
@@ -114,7 +114,7 @@ export default class NotificationsScreen extends Component {
                     </CardItem>
             </Card>
             <Card style={{flex:0}}>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('Settings')} underlayColor="white">
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('Settings')} underlayColor="#DCDCDC">
                     <CardItem style={{backgroundColor: '#2b2b2b' }}>
                       <Left>
                         <Icon color= "white" name="md-information-circle" size={40} type="ionicon" />
@@ -138,7 +138,7 @@ export default class NotificationsScreen extends Component {
                     </CardItem>
             </Card>
             <Card style={{flex:0}}>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('Settings')} underlayColor="white">
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('Settings')} underlayColor="#DCDCDC">
                     <CardItem style={{backgroundColor: '#2b2b2b' }}>
                       <Left>
                         <Icon color= "white" name="md-information-circle" size={40} type="ionicon" />

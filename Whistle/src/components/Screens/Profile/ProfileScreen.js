@@ -19,7 +19,7 @@ import Separator from './Separator'
 
 export default class ProfileScreen extends Component {
     static navigationOptions = {
-        title: 'PROFILE',
+        title: 'Profile',
         tabBarLabel: 'Profile',
         headerTintColor: 'black',
         tabBarIcon: ({ tintColor }) => (tintColor == 'white' ?

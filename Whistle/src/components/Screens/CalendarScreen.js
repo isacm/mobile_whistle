@@ -8,7 +8,7 @@ import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 
 export default class CalendarScreen extends Component {
     static navigationOptions = {
-      title: 'CALENDAR',
+      title: 'Calendar',
       tabBarLabel: 'Calendar',
       headerTintColor: 'black',
       tabBarIcon: ({ tintColor }) => (tintColor == 'white' ?

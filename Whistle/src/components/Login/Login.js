@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, View, Image, KeyboardAvoidingView,TextInput, Button, TouchableHighlight, Alert, TouchableOpacity  } from 'react-native';
 import { StackNavigator, NavigationActions} from 'react-navigation';
 import Menu from '../Screens/Menu';
+import Account from '../Screens/Settings/Account';
+import Notifications from '../Screens/Settings/Notifications';
+import About from '../Screens/Settings/About';
+import Contacts from '../Screens/Settings/Contacts';
+import Help from '../Screens/Settings/Help';
+
 import SettingsScreen from '../Screens/SettingsScreen';
 
 export default class Login extends Component {
@@ -132,6 +138,11 @@ const styles = StyleSheet.create({
 const navigator = StackNavigator ({
   Home: {screen: Login},
   Menu: {screen: Menu},
+  Account: {screen: Account},
+  Help: {screen: Help},
+  Contacts: {screen: Contacts},
+  Notifications: {screen: Notifications},
+  About: {screen: About}
 })
 
 // skip this line if using Create React Native App

@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
   },
   iconRow: {
     flex: 2,
+    justifyContent: 'center',
   },
   smsIcon: {
     color: '#FFCC00',

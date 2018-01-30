@@ -7,7 +7,7 @@ import ProfileScreen from './Profile/ProfileScreen';
 import SettingsScreen from './SettingsScreen';
 
   var menuScreenNavigator = TabNavigator({
-    Notifications : { screen : NotificationsScreen },
+    Notification : { screen : NotificationsScreen },
     Calendar : { screen : CalendarScreen },
     Profile : { screen : ProfileScreen },
     Settings: { screen: SettingsScreen },
