@@ -11,7 +11,7 @@ import NotificationDetail from '../Screens/NotificationDetail';
 import SelectedProfile from '../Screens/Profile/SelectedProfile';
 import PushController from '../PushController'
 import SettingsScreen from '../Screens/SettingsScreen';
-
+import api from '../Screens/api';
 import PushNotification from 'react-native-push-notification';
 
 export default class Login extends Component {
@@ -27,10 +27,21 @@ export default class Login extends Component {
 };
   constructor(props) {
     super(props);
-    this.state = {text: '', seconds:5};
+    this.state = {text: '', seconds:5,
+    usernameinput: '', pass: ''};
   } 
   _onPressButton() {
-    Alert.alert('Wrong Username or Password')
+    api.getReferee().then((resref) => {
+      this.setState({
+        referees: resref,
+        user: resref[0].id,
+        pass: resref[0].password
+      })
+      if(this.state.usernameinput == this.state.user){
+        this.props.navigation.navigate('Menu');
+      }
+      else {Alert.alert('Wrong username or password!');}
+    })  
   }
 
   componentDidMount(){
@@ -68,7 +79,8 @@ export default class Login extends Component {
                 style={styles.textInputSection}
                 placeholder="USERNAME"
                 returnKeyType="next"
-                onChangeText={(text) => this.setState({text})}
+                onChangeText={(usernameinput) => this.setState({usernameinput})}
+                value={this.state.usernameinput}
                 />
 
                 <TextInput underlineColorAndroid='transparent'
@@ -77,11 +89,13 @@ export default class Login extends Component {
                     placeholder="PASSWORD"
                     returnKeyType="done"
                     onChangeText={(text) => this.setState({text})}
+                    value={this.state.passwordinput}
+                    
                 />
                 </View>
 
                 <View style={styles.buttonView}>
-                    <TouchableHighlight onPress={() => this.props.navigation.navigate('Menu')} underlayColor="white">
+                    <TouchableHighlight onPress={() => this._onPressButton()} underlayColor="white">
                         <View style={styles.button}>
                             <Text style={styles.buttonText}>LOGIN</Text>
                         </View>

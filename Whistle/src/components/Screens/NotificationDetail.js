@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { StackNavigator, TabNavigator, NavigationActions} from 'react-navigation';
-import { StyleSheet, ScrollView, Text, View, TextInput, TouchableHighlight, Alert, TouchableOpacity, Image, FlatList } from 'react-native';
+import { StyleSheet, ActivityIndicator, ScrollView, Text, View, TextInput, TouchableHighlight, Alert, TouchableOpacity, Image, FlatList } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Left, Body, Right } from 'native-base';
+import api from './api';
+import Loading from '../Loading'
 
 export default class NotificationDetail extends Component {
+    state = {loaded: false}
     static navigationOptions = {
         title: 'Notification',
         headerTintColor: '#1a1a1a',
@@ -19,9 +22,62 @@ export default class NotificationDetail extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { text: 'NotificationDetail' };
+        this.state = {
+           games: [],
+           leagues: [],
+           referees: [],
+           directors: [],
+           teamhome : [],
+           teamaway : [],
+        }  
+        Loading.load(v => this.setState({loaded: true}));
     } 
 
+    componentWillMount() {
+        
+        api.getGames().then((res) => {
+            this.setState({
+                games: res,
+                gamedate: res[0].date,
+                gamehour: res[0].date.split('T')[1].split('.')[0],
+                teamhome: res[0].home_teamId,
+                teamaway: res[0].guest_teamId,
+                referee: res[0].referee_id[0]
+            })
+            console.log("RESREF " + this.state.referee)
+
+            api.getReferee().then((resref) => {
+                this.setState({
+                    referees: resref,
+                    name1: resref[0].username
+                })
+                console.log("RESREF " + this.state.referees)
+            })
+
+          
+
+            api.getTeam(this.state.teamhome).then((reshome) => {
+                this.setState({
+                    teamhome: reshome,
+                    homename: reshome.name
+                })
+            })
+            api.getTeam(this.state.teamaway).then((resaway) => {
+                this.setState({
+                    teamaway: resaway,
+                    awayname: resaway.name,
+                    leaguename: resaway.leagueId
+                })
+
+                        api.getLeagues(this.state.leaguename).then((resleague) => {
+                            this.setState({
+                                leagues: resleague,
+                                nameleague: resleague.name
+                            })
+                        })            
+            })       
+    });
+}
     renderStatus = () => {
         return(
         <View style={{ marginTop: "5%", marginLeft: "5%" }}>
@@ -31,16 +87,19 @@ export default class NotificationDetail extends Component {
     }
     renderDate = () => {
         return (
-        <View style={{ marginTop: "5%", marginLeft: "5%" }}>
+            <View style={{ marginTop: "5%", marginLeft: "5%" }}>
             <Text style={styles.headertext}> DATE </Text>
-            <Text style={styles.actualtext}> 21/02/2018 </Text>
+            <Text style={styles.actualtext}> 
+                {this.state.gamedate}
+            </Text>
         </View>)
+        //if(bababa != undefined)
     }
     renderHour= () => {
         return (
             <View style={{ marginTop: "5%", marginLeft: "5%" }}>
                 <Text style={styles.headertext}> HOUR </Text>
-                <Text style={styles.actualtext}> 10:30 GAME START </Text>
+                <Text style={styles.actualtext}> {this.state.gamehour} </Text>
             </View>)
     }
 
@@ -48,8 +107,9 @@ export default class NotificationDetail extends Component {
         return(
         <View style={{ marginTop: "5%", marginLeft: "5%" }}>
             <Text style={styles.headertext}> GAME </Text>
-            <Text style={styles.actualtext}> CNS Série A </Text>
-            <Text style={styles.actualtext}> SC VIANENESE - CANELAS FC </Text>
+            <Text style={styles.actualtext}> League: {this.state.nameleague} </Text>
+                <Text style={styles.teamtext}> H: {this.state.homename} </Text>
+                <Text style={styles.teamtext}> A: {this.state.awayname} </Text>
         </View> 
         )
     }
@@ -64,11 +124,14 @@ export default class NotificationDetail extends Component {
         return(
             <Card style={styles.assistentContainer}>
                 <View style={styles.twobuttoncontainer}>
-                        <Text style={styles.assistenttext} > Artur Ladrão Dias </Text>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('SelectedProfile')} underlayColor="#dcdcdc" >
-                        <Icon color="#FFCC00" name="chevron-thin-right" size={30} type="entypo" />
+                    <Text style={styles.assistenttext}>  
+                    {this.state.name1}
+                    </Text>
+                
+                    <TouchableOpacity underlayColor="#dcdcdc" >
+                        <Icon color="#FFCC00" name="chevron-thin-right" size={30} type="entypo" />               
                     </TouchableOpacity>
-                </View>
+                    </View>
             </Card>
         )
     }
@@ -116,21 +179,29 @@ export default class NotificationDetail extends Component {
     }
 
     render() {
+        if(!this.state.loaded){
+            return(
+                <View style={[styles.container, styles.horizontal]}>
+                <ActivityIndicator size="large" color="#FFCC00" />
+                </View>);
+        }
+        else{
         return (
-            <ScrollView style={styles.container}>
-                {this.renderStatus()}
-                {this.renderDate()}
-                {this.renderHour()}
-                {this.renderGame()}
-                {this.renderEntourage()}
-                {this.renderAssistent()}
-                {this.renderAssistent()}
-                {this.renderMap()}
-                {this.renderInitialButtons()}
-                {/*{this.renderCancelButton()}*/}
-            </ScrollView>
-        
+                //{this.newRender()}
+                <ScrollView style={styles.container}>
+                    {this.renderStatus()}
+                    {this.renderDate()}
+                    {this.renderHour()}
+                    {this.renderGame()}
+                    {this.renderEntourage()}
+                    {this.renderAssistent()}
+                    {this.renderAssistent()}
+                    {this.renderMap()}
+                    {/*{this.renderInitialButtons()}*/}
+                    {this.renderCancelButton()}
+                </ScrollView>
         )
+    }
     }}
 
     const styles = StyleSheet.create({
@@ -179,6 +250,12 @@ export default class NotificationDetail extends Component {
         actualtext: {
             color: "#DCDCDC",
             fontSize: 18,
+            marginBottom: "2%",
+            fontWeight: "bold"
+        },
+        teamtext: {
+            color: "#DCDCDC",
+            fontSize: 22,
             fontWeight: "bold"
         },
         itemcontainer: {
@@ -237,5 +314,8 @@ export default class NotificationDetail extends Component {
             width: "80%",
         },
      
-    
+        horizontal: {
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+          }
     })

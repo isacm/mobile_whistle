@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StackNavigator, TabNavigator, NavigationActions} from 'react-navigation';
-import { StyleSheet, Text, View, TextInput, Button, TouchableHighlight, Alert, TouchableOpacity, Image, ScrollView} from 'react-native';
+import { StyleSheet, ActivityIndicator, Text, View, TextInput, Button, TouchableHighlight, Alert, TouchableOpacity, Image, ScrollView} from 'react-native';
 import ContentLoader from 'react-native-content-loader';
 import {Icon} from 'react-native-elements';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Left, Body, Right} from 'native-base';
@@ -30,13 +30,10 @@ export default class NotificationsScreen extends Component {
       super(props);
       this.state = {text: 'notifications',
                     loading: true };
-    } 
-  
+    }
   
     render() {
-
       if(this.state.loading){
-
       return ( 
         <ScrollView>
         <Container style={styles.container}>
@@ -190,5 +187,10 @@ export default class NotificationsScreen extends Component {
       fontWeight: 'bold',
        color: "#2b2b2b",
       alignItems: 'center'
+    },
+
+    horizontal: {
+      flexDirection: 'row',
+      justifyContent: 'space-around',
     }
   })
