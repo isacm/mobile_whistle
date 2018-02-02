@@ -38,10 +38,22 @@ export default class Login extends Component {
         pass: resref[0].password
       })
       if(this.state.usernameinput == this.state.user){
-        this.props.navigation.navigate('Menu');
+        this.reset();
       }
       else {Alert.alert('Wrong username or password!');}
     })  
+  }
+
+  reset(){
+    return this.props
+               .navigation
+               .dispatch(NavigationActions.reset(
+                 {
+                    index: 0,
+                    actions: [
+                      NavigationActions.navigate({ routeName: 'Menu'})
+                    ]
+                  }));
   }
 
   componentDidMount(){
