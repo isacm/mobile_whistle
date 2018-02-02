@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, AppState, Text, View, Image, KeyboardAvoidingView, TextInput, Button, TouchableHighlight, Alert, TouchableOpacity } from 'react-native';
 import { StackNavigator, NavigationActions } from 'react-navigation';
+import { List, Icon } from 'react-native-elements';
 import Menu from '../Screens/Menu';
 import Account from '../Screens/Settings/Account';
 import Notifications from '../Screens/Settings/Notifications';
@@ -36,21 +37,19 @@ export default class Login extends Component {
     api.getReferee().then((resref) => {
       this.setState({
         referees: resref,
-        user: resref[0].id,
-        pass: resref[0].password
+        user: resref[6].id,
+        pass: resref[6].password
       })
       if (this.state.usernameinput == this.state.user) {
         this.props.navigation.navigate('Menu');
       }
       else {
-        this.refs.UsernameInput.setNativeProps({ text: '' })
         this.refs.PasswordInput.setNativeProps({ text: '' })
         Alert.alert(
           'Invalid credentials',
           'Try again',
           [
-            { text: 'OK', onPress: () => console.log('OK pressed'), style: 'cancel' },
-            { text: 'Forgot my password', onPress: () => console.log('Forgot my password pressed') },
+            { text: 'OK', onPress: () => console.log('OK pressed'), style: 'cancel' }
           ],
           { cancelable: false });
       }
@@ -90,6 +89,7 @@ export default class Login extends Component {
           <View>
             <TextInput underlineColorAndroid='transparent'
               ref="UsernameInput"
+              autoCorrect={false}
               style={styles.textInputSection}
               placeholder="USERNAME"
               returnKeyType="next"
@@ -102,6 +102,7 @@ export default class Login extends Component {
 
             <TextInput underlineColorAndroid='transparent'
               ref = "PasswordInput"
+              autoCorrect={false}
               style={styles.textInputSection}
               secureTextEntry={true}
               placeholder="PASSWORD"
@@ -117,6 +118,9 @@ export default class Login extends Component {
                 <Text style={styles.buttonText}>LOGIN</Text>
               </View>
             </TouchableHighlight>
+            <TouchableOpacity underlayColor="#FFCC00">
+              <Text style={styles.inc}> Forgot your password? </Text>
+            </TouchableOpacity>
           </View>
         </View>
         <PushController />
@@ -190,7 +194,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: '10%',
     opacity: 0.8
+  },
+  inc: {
+    marginTop: '10%',
+    textAlign: 'center',
+    color: 'black',
+    fontSize: 15,
   }
+
 })
 
 const navigator = StackNavigator({
