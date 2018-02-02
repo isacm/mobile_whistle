@@ -43,6 +43,8 @@ export default class Login extends Component {
         this.props.navigation.navigate('Menu');
       }
       else {
+        this.refs.UsernameInput.setNativeProps({ text: '' })
+        this.refs.PasswordInput.setNativeProps({ text: '' })
         Alert.alert(
           'Invalid credentials',
           'Try again',
@@ -87,6 +89,7 @@ export default class Login extends Component {
         <View style={styles.formContainer}>
           <View>
             <TextInput underlineColorAndroid='transparent'
+              ref="UsernameInput"
               style={styles.textInputSection}
               placeholder="USERNAME"
               returnKeyType="next"
@@ -98,14 +101,13 @@ export default class Login extends Component {
             />
 
             <TextInput underlineColorAndroid='transparent'
-              ref='PasswordInput'
+              ref = "PasswordInput"
               style={styles.textInputSection}
               secureTextEntry={true}
               placeholder="PASSWORD"
               returnKeyType="done"
               onChangeText={(text) => this.setState({ text })}
               value={this.state.passwordinput}
-
             />
           </View>
 
