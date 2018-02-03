@@ -32,6 +32,7 @@ export default class Login extends Component {
       modalVisible: false,  
       text: '', seconds: 5,
       usernameinput: '', pass: '',
+      recoveryinput: ''
     };
   }
 
@@ -67,9 +68,10 @@ export default class Login extends Component {
   }
 
   mountModal() {
+
     return(
     <Modal
-      animationType={"fade"}
+      animationType={"slide"}
       transparent={true}
       visible={this.state.modalVisible}
       onRequestClose={() => { alert("Modal has been closed.") }}
@@ -77,21 +79,38 @@ export default class Login extends Component {
       <View style={styles.modalContainer}>
         <View style={styles.modalView}>
           <View style={styles.modalHeader}>
-            <Text style={styles.notification}>Notifications</Text>
+            <Text style={styles.headermodal}>Recover Password</Text>
           </View>
           <View style={styles.modalBody}>
-            <Text> teste </Text>
+              <TextInput underlineColorAndroid='transparent'
+                ref="RecoveryInput"
+                autoCorrect={false}
+                style={styles.recoverInputSection}
+                secureTextEntry={true}
+                blurOnSubmit={false} 
+                autoFocus ={true}
+                keyboardType="email-address"
+                placeholder="EMAIL TO SEND DETAILS"
+                returnKeyType="default"
+                onChangeText={(text) => this.setState({ text })}
+                value={this.state.recoveryinput}
+                onSubmitEditing={(event) => { this.setModalVisible(!this.state.modalVisible); }}
+              />
           </View>
+            <TouchableOpacity style={styles.modalButtons} onPress={() => { this.setModalVisible(!this.state.modalVisible) }} underlayColor="#2b2b2b">
+              <Icon color="#FFCC00" name="mail" size={50} type="entypo" />
+            </TouchableOpacity>
           <View style={styles.modalFooter}>
-            <TouchableHighlight style={styles.modalButtons} onPress={() => { this.setModalVisible(!this.state.modalVisible) }} underlayColor="#2b2b2b">
-              <Text style={styles.cancel}>Cancel</Text>
-            </TouchableHighlight>
+            <TouchableOpacity style={styles.modalButtons} onPress={() => { this.setModalVisible(!this.state.modalVisible) }} underlayColor="#2b2b2b">
+                <Icon color="#FFCC00" name="chevron-thin-down" size={30} type="entypo" />
+            </TouchableOpacity>
           </View>
         </View>
       </View>
     </Modal>
     )
   }
+
   componentDidMount() {
     AppState.addEventListener('change', this._handleAppStateChange);
 
@@ -207,6 +226,17 @@ const styles = StyleSheet.create({
     borderRadius: 10
   },
 
+  recoverInputSection: {
+    width: '90%',
+    marginTop: '5%',
+    padding: '5%',
+    alignItems: 'center',
+    textAlign: 'center',
+    alignSelf: 'center',
+    backgroundColor: '#FFCC00',
+    borderRadius: 10
+  },
+
   buttonView: {
     marginTop: '10%',
     alignItems: 'center',
@@ -242,8 +272,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   modalContainer: {
-    backgroundColor: '#2b2b2b',
-    marginTop: '50%',
+    backgroundColor: 'black',
+    marginTop: '30%',
     margin: 15,
 
   },
@@ -254,21 +284,14 @@ const styles = StyleSheet.create({
   modalBody: {
     margin: '5%',
     flexDirection: 'column',
-    flexDirection: 'row',
-    marginBottom: 20,
+    alignItems: "center",
+    marginBottom: 50,
     borderRadius: 30,
   },
 
   modalFooter: {
     margin: '5%',
   },
-
-  cancel: {
-    textAlign: 'right',
-    fontSize: 20,
-    color: '#545454'
-  },
-
   text: {
     margin: '8%',
     fontSize: 20,
@@ -281,10 +304,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#8E8E8E',
   },
 
-  notification: {
-    color: 'white',
+  headermodal: {
+    color: '#FFCC00',
     margin: '5%',
-    fontSize: 25
+    fontSize: 20,
+    textAlign: "center"
   }
 })
 
