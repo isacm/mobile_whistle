@@ -5,6 +5,7 @@ import ContentLoader from 'react-native-content-loader';
 import {Icon} from 'react-native-elements';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Left, Body, Right} from 'native-base';
 import { Circle, Rect } from 'react-native-svg';
+import api from './api'
 
 export default class NotificationsScreen extends Component {
     static navigationOptions = {
@@ -29,135 +30,60 @@ export default class NotificationsScreen extends Component {
     constructor(props) {
       super(props);
       this.state = {text: 'notifications',
-                    loading: true };
+                    loading: true,
+                    notifications: [] };
     }
+    
+
+    getNotificationsToRender() {
+
+      api.getDesignations('').then((res) =>{
+        this.setState({
+          notifications: res
+        })
+      });
+    }
+
+    renderNotifications(item, index) {
+      return (
+        <Card>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('NotificationDetail')} underlayColor="#DCDCDC" >
+                      <CardItem style={{backgroundColor: '#2b2b2b' }}>
+                        <Left>
+                          <Icon color= "white" name="md-information-circle" size={40} type="ionicon" />
+                          <Body>
+                            <Text style={styles.headerText}>{item.refereeId}</Text>
+                          </Body>
+                        </Left>
+                        <Right>
+                          <Icon color="white" name="chevron-thin-right" size={20} type = "entypo" />
+                        </Right>
+                      </CardItem>
+                      </TouchableOpacity>
+                      <CardItem style={{ backgroundColor: '#FFCC00'}}>
+                        <Body>
+                          <Text style={styles.noteText}>COMPETIÇÃO: CNS Série A</Text>
+                          <Text style ={styles.gameText}>
+                          VIANENSE FC - CANELAS FC
+                          </Text>
+                          <Text style={styles.noteText}>Campo Manuel Machado, Viana do Castelo</Text>
+                        </Body>
+                      </CardItem>
+                </Card>
+      )
+    };
+
   
     render() {
+      this.getNotificationsToRender()
       if(this.state.loading){
       return ( 
-        <ScrollView>
+        <ScrollView style={styles.container}>
         <Container style={styles.container}>
-          <Content>
-          <Card style={{flex:0}}>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('NotificationDetail')} underlayColor="#DCDCDC">
-                  <CardItem style={{backgroundColor: '#2b2b2b' }}>
-                    <Left>
-                      <Icon color= "white" name="md-information-circle" size={40} type="ionicon" />
-                      <Body>
-                        <Text style={styles.headerText}>12/02/2018</Text>
-                      </Body>
-                    </Left>
-                    <Right>
-                      <Icon color="white" name="chevron-thin-right" size={20} type = "entypo" />
-                    </Right>
-                  </CardItem>
-                  </TouchableOpacity>
-                  <CardItem style={{ backgroundColor: 'white'}}>
-                    <Body>
-                      <Text style={styles.noteText}>COMPETIÇÃO: CNS Série A</Text>
-                      <Text style ={styles.gameText}>
-                      VIANENSE FC - CANELAS FC
-                      </Text>
-                      <Text style={styles.noteText}>Campo Manuel Machado, Viana do Castelo</Text>
-                    </Body>
-                  </CardItem>
-            </Card>
-            <Card style={{flex:0}}>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('NotificationDetail')} underlayColor="#DCDCDC">
-                    <CardItem style={{backgroundColor: '#2b2b2b' }}>
-                      <Left>
-                        <Icon color= "white" name="md-information-circle" size={40} type="ionicon" />
-                        <Body>
-                          <Text style={styles.headerText}>12/02/2018</Text>
-                        </Body>
-                      </Left>
-                      <Right>
-                        <Icon color="white" name="chevron-thin-right" size={20} type = "entypo" />
-                      </Right>
-                    </CardItem>
-                    </TouchableOpacity>
-                    <CardItem style={{ backgroundColor: 'white'}}>
-                      <Body>
-                        <Text style={styles.noteText}>COMPETIÇÃO: CNS Série A</Text>
-                        <Text style ={styles.gameText}>
-                        VIANENSE FC - CANELAS FC
-                        </Text>
-                        <Text style={styles.noteText}>Campo Manuel Machado, Viana do Castelo</Text>
-                      </Body>
-                    </CardItem>
-            </Card>
-            <Card style={{flex:0}}>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('NotificationDetail')} underlayColor="#DCDCDC">
-                    <CardItem style={{backgroundColor: '#2b2b2b' }}>
-                      <Left>
-                        <Icon color= "white" name="md-information-circle" size={40} type="ionicon" />
-                        <Body>
-                          <Text style={styles.headerText}>12/02/2018</Text>
-                        </Body>
-                      </Left>
-                      <Right>
-                        <Icon color="white" name="chevron-thin-right" size={20} type = "entypo" />
-                      </Right>
-                    </CardItem>
-                    </TouchableOpacity>
-                    <CardItem style={{ backgroundColor: 'white'}}>
-                      <Body>
-                        <Text style={styles.noteText}>COMPETIÇÃO: CNS Série A</Text>
-                        <Text style ={styles.gameText}>
-                        VIANENSE FC - CANELAS FC
-                        </Text>
-                        <Text style={styles.noteText}>Campo Manuel Machado, Viana do Castelo</Text>
-                      </Body>
-                    </CardItem>
-            </Card>
-            <Card style={{flex:0}}>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('NotificationDetail')} underlayColor="#DCDCDC">
-                    <CardItem style={{backgroundColor: '#2b2b2b' }}>
-                      <Left>
-                        <Icon color= "white" name="md-information-circle" size={40} type="ionicon" />
-                        <Body>
-                          <Text style={styles.headerText}>12/02/2018</Text>
-                        </Body>
-                      </Left>
-                      <Right>
-                        <Icon color="white" name="chevron-thin-right" size={20} type = "entypo" />
-                      </Right>
-                    </CardItem>
-                    </TouchableOpacity>
-                    <CardItem style={{ backgroundColor: 'white'}}>
-                      <Body>
-                        <Text style={styles.noteText}>COMPETIÇÃO: CNS Série A</Text>
-                        <Text style ={styles.gameText}>
-                        VIANENSE FC - CANELAS FC
-                        </Text>
-                        <Text style={styles.noteText}>Campo Manuel Machado, Viana do Castelo</Text>
-                      </Body>
-                    </CardItem>
-            </Card>
-            <Card style={{flex:0}}>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('NotificationDetail')} underlayColor="#DCDCDC">
-                    <CardItem style={{backgroundColor: '#2b2b2b' }}>
-                      <Left>
-                        <Icon color= "white" name="md-information-circle" size={40} type="ionicon" />
-                        <Body>
-                          <Text style={styles.headerText}>12/02/2018</Text>
-                        </Body>
-                      </Left>
-                      <Right>
-                        <Icon color="white" name="chevron-thin-right" size={20} type = "entypo" />
-                      </Right>
-                    </CardItem>
-                    </TouchableOpacity>
-                    <CardItem style={{ backgroundColor: 'white'}}>
-                      <Body>
-                        <Text style={styles.noteText}>COMPETIÇÃO: CNS Série A</Text>
-                        <Text style ={styles.gameText}>
-                        VIANENSE FC - CANELAS FC
-                        </Text>
-                        <Text style={styles.noteText}>Campo Manuel Machado, Viana do Castelo</Text>
-                      </Body>
-                    </CardItem>
-            </Card>
+          <Content style={styles.cardcontainer}>
+            {this.state.notifications.map((result, index) => {
+              return this.renderNotifications(result, index);
+            })}
             </Content>
         </Container>
         </ScrollView>
@@ -192,5 +118,10 @@ export default class NotificationsScreen extends Component {
     horizontal: {
       flexDirection: 'row',
       justifyContent: 'space-around',
+    },
+
+    cardcontainer: {
+      padding:8,
+      backgroundColor: '#1a1a1a',
     }
   })
