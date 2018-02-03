@@ -66,6 +66,32 @@ export default class Login extends Component {
     })
   }
 
+  mountModal() {
+    return(
+    <Modal
+      animationType={"fade"}
+      transparent={true}
+      visible={this.state.modalVisible}
+      onRequestClose={() => { alert("Modal has been closed.") }}
+    >
+      <View style={styles.modalContainer}>
+        <View style={styles.modalView}>
+          <View style={styles.modalHeader}>
+            <Text style={styles.notification}>Notifications</Text>
+          </View>
+          <View style={styles.modalBody}>
+            <Text> teste </Text>
+          </View>
+          <View style={styles.modalFooter}>
+            <TouchableHighlight style={styles.modalButtons} onPress={() => { this.setModalVisible(!this.state.modalVisible) }} underlayColor="#2b2b2b">
+              <Text style={styles.cancel}>Cancel</Text>
+            </TouchableHighlight>
+          </View>
+        </View>
+      </View>
+    </Modal>
+    )
+  }
   componentDidMount() {
     AppState.addEventListener('change', this._handleAppStateChange);
 
@@ -92,28 +118,8 @@ export default class Login extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Modal
-          animationType={"fade"}
-          transparent={true}
-          visible={this.state.modalVisible}
-          onRequestClose={() => { alert("Modal has been closed.") }}
-        >
-          <View style={styles.modalContainer}>
-            <View style={styles.modalView}>
-              <View style={styles.modalHeader}>
-                <Text style={styles.notification}>Notifications</Text>
-              </View>
-              <View style={styles.modalBody}>
-               <Text> teste </Text>
-              </View>
-              <View style={styles.modalFooter}>
-                <TouchableHighlight style={styles.modalButtons} onPress={() => { this.setModalVisible(!this.state.modalVisible) }} underlayColor="#2b2b2b">
-                  <Text style={styles.cancel}>Cancel</Text>
-                </TouchableHighlight>
-              </View>
-            </View>
-          </View>
-        </Modal>
+       
+       {this.mountModal()}
       
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
 
