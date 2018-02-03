@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, AppState, Text, View, Image, KeyboardAvoidingView, TextInput, Button, TouchableHighlight, Alert, TouchableOpacity } from 'react-native';
+import { AppRegistry, ListView, AlertIOS ,StyleSheet, AppState, Modal ,Text, View, Image, KeyboardAvoidingView, TextInput, Button, TouchableHighlight, Alert, TouchableOpacity } from 'react-native';
 import { StackNavigator, NavigationActions } from 'react-navigation';
 import { List, Icon } from 'react-native-elements';
 import Menu from '../Screens/Menu';
@@ -29,10 +29,20 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      modalVisible: false,  
       text: '', seconds: 5,
-      usernameinput: '', pass: ''
+      usernameinput: '', pass: '',
     };
   }
+
+  setModalVisible(visible) {
+    this.setState({ modalVisible: visible });
+  }
+
+  _pressAcceptReason() {
+    this.setModalVisible(false);
+  }
+
   _onPressButton() {
     api.getReferee().then((resref) => {
       this.setState({
@@ -81,6 +91,30 @@ export default class Login extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
+      <View style={styles.container}>
+        <Modal
+          animationType={"fade"}
+          transparent={true}
+          visible={this.state.modalVisible}
+          onRequestClose={() => { alert("Modal has been closed.") }}
+        >
+          <View style={styles.modalContainer}>
+            <View style={styles.modalView}>
+              <View style={styles.modalHeader}>
+                <Text style={styles.notification}>Notifications</Text>
+              </View>
+              <View style={styles.modalBody}>
+               <Text> teste </Text>
+              </View>
+              <View style={styles.modalFooter}>
+                <TouchableHighlight style={styles.modalButtons} onPress={() => { this.setModalVisible(!this.state.modalVisible) }} underlayColor="#2b2b2b">
+                  <Text style={styles.cancel}>Cancel</Text>
+                </TouchableHighlight>
+              </View>
+            </View>
+          </View>
+        </Modal>
+      
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
 
         <Image style={styles.logo} source={require('../../images/blacktext.png')} />
@@ -111,21 +145,21 @@ export default class Login extends Component {
               value={this.state.passwordinput}
             />
           </View>
-
           <View style={styles.buttonView}>
             <TouchableHighlight onPress={() => this._onPressButton()} underlayColor="#FFCC00">
               <View style={styles.button}>
                 <Text style={styles.buttonText}>LOGIN</Text>
               </View>
             </TouchableHighlight>
-            <TouchableOpacity underlayColor="#FFCC00">
+            <TouchableHighlight onPress={() => this.setModalVisible(true)} underlayColor="#FFCC00">
               <Text style={styles.inc}> Forgot your password? </Text>
-            </TouchableOpacity>
+            </TouchableHighlight>
           </View>
         </View>
         <PushController />
       </KeyboardAvoidingView>
 
+      </View>
     );
   }
 }
@@ -196,12 +230,56 @@ const styles = StyleSheet.create({
     opacity: 0.8
   },
   inc: {
-    marginTop: '10%',
+    marginTop: '12%',
     textAlign: 'center',
     color: 'black',
     fontSize: 15,
-  }
+  },
+  modalContainer: {
+    backgroundColor: '#2b2b2b',
+    marginTop: '50%',
+    margin: 15,
 
+  },
+
+  modalView: {
+  },
+
+  modalBody: {
+    margin: '5%',
+    flexDirection: 'column',
+    flexDirection: 'row',
+    marginBottom: 20,
+    borderRadius: 30,
+  },
+
+  modalFooter: {
+    margin: '5%',
+  },
+
+  cancel: {
+    textAlign: 'right',
+    fontSize: 20,
+    color: '#545454'
+  },
+
+  text: {
+    margin: '8%',
+    fontSize: 20,
+    color: 'white'
+  },
+
+  separator: {
+    flex: 1,
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: '#8E8E8E',
+  },
+
+  notification: {
+    color: 'white',
+    margin: '5%',
+    fontSize: 25
+  }
 })
 
 const navigator = StackNavigator({
