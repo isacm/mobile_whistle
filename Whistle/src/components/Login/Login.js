@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
   logo: {
     flex: 1,
     marginTop: '20%',
-    aspectRatio: 1.8,
+    aspectRatio: 2.1,
     resizeMode: 'cover'
   },
 
