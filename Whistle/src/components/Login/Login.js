@@ -116,11 +116,11 @@ export default class Login extends Component {
               />
           </View>
             <TouchableOpacity style={styles.modalButtons} onPress={() => {this.setModalVisible(!this.state.modalVisible), this.timealert()}} underlayColor="#2b2b2b">
-              <Icon color="#FFCC00" name="mail" size={50} type="entypo" />
+              <Icon color="white" name="mail" size={50} type="entypo" />
             </TouchableOpacity>
           <View style={styles.modalFooter}>
             <TouchableOpacity style={styles.modalButtons} onPress={() => { this.setModalVisible(!this.state.modalVisible) }} underlayColor="#2b2b2b">
-                <Icon color="#FFCC00" name="chevron-thin-down" size={30} type="entypo" />
+                <Icon color="white" name="chevron-thin-down" size={30} type="entypo" />
             </TouchableOpacity>
           </View>
         </View>
@@ -246,12 +246,11 @@ const styles = StyleSheet.create({
 
   recoverInputSection: {
     width: '90%',
-    marginTop: '5%',
     padding: '5%',
     alignItems: 'center',
     textAlign: 'center',
     alignSelf: 'center',
-    backgroundColor: '#FFCC00',
+    backgroundColor: 'white',
     borderRadius: 10
   },
 
@@ -290,7 +289,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   modalContainer: {
-    backgroundColor: 'black',
+    backgroundColor: '#1a1a1a',
     marginTop: '30%',
     margin: 15,
 
@@ -303,7 +302,7 @@ const styles = StyleSheet.create({
     margin: '5%',
     flexDirection: 'column',
     alignItems: "center",
-    marginBottom: 50,
+    marginBottom: 60,
     borderRadius: 30,
   },
 
@@ -323,7 +322,7 @@ const styles = StyleSheet.create({
   },
 
   headermodal: {
-    color: '#FFCC00',
+    color: 'white',
     margin: '5%',
     fontSize: 20,
     textAlign: "center"
