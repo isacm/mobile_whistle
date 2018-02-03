@@ -67,9 +67,27 @@ export default class Login extends Component {
     })
   }
 
-  mountModal() {
+  timealert() {
 
+      setTimeout(() => {
+        Alert.alert(
+          'An email has been sent',
+          'Check your inbox',
+          [
+            { text: 'OK', onPress: () => console.log('OK pressed'), style: 'cancel' }
+          ],
+          { cancelable: false }
+        );
+      }, 100)
+
+
+    
+  }
+
+  mountModal() {
+    
     return(
+
     <Modal
       animationType={"slide"}
       transparent={true}
@@ -86,18 +104,18 @@ export default class Login extends Component {
                 ref="RecoveryInput"
                 autoCorrect={false}
                 style={styles.recoverInputSection}
-                secureTextEntry={true}
                 blurOnSubmit={false} 
                 autoFocus ={true}
+                autoCapitalize="none"
                 keyboardType="email-address"
-                placeholder="EMAIL TO SEND DETAILS"
+                placeholder="EMAIL"
                 returnKeyType="default"
-                onChangeText={(text) => this.setState({ text })}
+                onChangeText={(recoveryinput) => this.setState({ recoveryinput })}
                 value={this.state.recoveryinput}
-                onSubmitEditing={(event) => { this.setModalVisible(!this.state.modalVisible); }}
+                onSubmitEditing={(event) => {this.setModalVisible(!this.state.modalVisible) }}
               />
           </View>
-            <TouchableOpacity style={styles.modalButtons} onPress={() => { this.setModalVisible(!this.state.modalVisible) }} underlayColor="#2b2b2b">
+            <TouchableOpacity style={styles.modalButtons} onPress={() => {this.setModalVisible(!this.state.modalVisible), this.timealert()}} underlayColor="#2b2b2b">
               <Icon color="#FFCC00" name="mail" size={50} type="entypo" />
             </TouchableOpacity>
           <View style={styles.modalFooter}>
@@ -137,7 +155,7 @@ export default class Login extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-       
+    
        {this.mountModal()}
       
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
@@ -162,6 +180,7 @@ export default class Login extends Component {
             <TextInput underlineColorAndroid='transparent'
               ref = "PasswordInput"
               autoCorrect={false}
+              autoCapitalize="none"
               style={styles.textInputSection}
               secureTextEntry={true}
               placeholder="PASSWORD"
@@ -171,7 +190,7 @@ export default class Login extends Component {
             />
           </View>
           <View style={styles.buttonView}>
-            <TouchableHighlight onPress={() => this._onPressButton()} underlayColor="#FFCC00">
+              <TouchableHighlight onPress={() => this._onPressButton()} underlayColor="#FFCC00">
               <View style={styles.button}>
                 <Text style={styles.buttonText}>LOGIN</Text>
               </View>
@@ -183,7 +202,6 @@ export default class Login extends Component {
         </View>
         <PushController />
       </KeyboardAvoidingView>
-
       </View>
     );
   }
