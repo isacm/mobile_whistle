@@ -31,28 +31,64 @@ export default class NotificationsScreen extends Component {
       super(props);
       this.state = {text: 'notifications',
                     loading: true,
-                    notifications: [] };
+                    notifications: [],
+                    games: [],
+                    game: null, 
+                    notificationsDetails: []}
     }
     
 
-    getNotificationsToRender() {
+    componentWillMount() {
 
-      api.getDesignations('').then((res) =>{
+      api.getDesignationsByRefereeId('AB1').then((res) =>{
         this.setState({
           notifications: res
         })
+
+        this.state.notifications.map((result, index) => {
+          api.getGamesByDesignation(result.gameId).then((gameres) =>{
+            this.setState({
+              game: gameres
+            })
+            api.getTeam(this.state.game.home_teamId).then((homeres) =>{
+              this.setState({
+                home: homeres
+              })
+            })
+            api.getTeam(this.state.game.guest_teamId).then((guestres) =>{
+              this.setState({
+                guest: guestres
+              })
+              var notifDetail= {date: this.state.game.date, home: this.state.home, guest: this.state.guest}
+              this.state.notificationsDetails.push(notifDetail)
+            })
+          })
+         })
       });
+
+
+    }
+
+    getGameInfo(){
+      for(var i =0; i<this.state.notifications.length;i++){
+        api.getGamesByDesignation(this.state.notifications[i].gameId).then((gameres) =>{
+          this.setState({
+            game: gameres
+          })
+          this.state.games.push(this.state.game.date);
+        })
+      }
     }
 
     renderNotifications(item, index) {
       return (
-        <Card>
+        <Card key={item.date} >
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('NotificationDetail')} underlayColor="#DCDCDC" >
                       <CardItem style={{backgroundColor: '#2b2b2b' }}>
                         <Left>
                           <Icon color= "white" name="md-information-circle" size={40} type="ionicon" />
                           <Body>
-                            <Text style={styles.headerText}>{item.refereeId}</Text>
+                            <Text style={styles.headerText}>{this.state.notificationsDetails.length}</Text>
                           </Body>
                         </Left>
                         <Right>
@@ -75,13 +111,13 @@ export default class NotificationsScreen extends Component {
 
   
     render() {
-      this.getNotificationsToRender()
+      console.log(this.state.notificationsDetails);
       if(this.state.loading){
       return ( 
         <ScrollView style={styles.container}>
         <Container style={styles.container}>
           <Content style={styles.cardcontainer}>
-            {this.state.notifications.map((result, index) => {
+            {this.state.notificationsDetails.map((result, index) => {
               return this.renderNotifications(result, index);
             })}
             </Content>

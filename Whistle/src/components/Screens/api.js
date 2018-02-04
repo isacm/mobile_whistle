@@ -15,8 +15,12 @@ var api = {
         var url = `http://localhost:3000/api/Teams/` + id;
         return fetch(url).then((res) => res.json());
     },
-    getDesignations() {
-        var url = `http://localhost:3000/api/Designations/`;
+    getDesignationsByRefereeId(id) {
+        var url = `http://0.0.0.0:3000/api/Referees/` + id + `/designations`;
+        return fetch(url).then((res) => res.json());
+    },
+    getGamesByDesignation(id){
+        var url = `http://0.0.0.0:3000/api/Games/` + id;
         return fetch(url).then((res) => res.json());
     }
 };
