@@ -48,21 +48,22 @@ export default class Login extends Component {
     api.getReferee().then((resref) => {
       this.setState({
         referees: resref,
-        user: resref[6].id,
-        pass: resref[6].password
+        user: resref[0].id,
+        pass: resref[0].password
       })
       if(this.state.usernameinput == this.state.user){
         this.reset();
       }
       else {
         this.refs.PasswordInput.setNativeProps({ text: '' })
+        setTimeout(() => {
         Alert.alert(
           'Invalid credentials',
           'Try again',
           [
             { text: 'OK', onPress: () => console.log('OK pressed'), style: 'cancel' }
           ],
-          { cancelable: false });
+          { cancelable: false })},1000)
       }
     })
   }
