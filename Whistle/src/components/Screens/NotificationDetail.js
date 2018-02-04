@@ -39,7 +39,7 @@ export default class NotificationDetail extends Component {
         api.getGames().then((res) => {
             this.setState({
                 games: res,
-                gamedate: res[0].date,
+                gamedate: res[0].date.split('T')[0],
                 gamehour: res[0].date.split('T')[1].split('.')[0],
                 teamhome: res[0].home_teamId,
                 teamaway: res[0].guest_teamId,
@@ -130,7 +130,7 @@ export default class NotificationDetail extends Component {
                         {this.state.name1}
                         </Text>
                     
-                        <TouchableOpacity underlayColor="#dcdcdc" >
+                        <TouchableOpacity underlayColor="#dcdcdc" onPress={() => this.props.navigation.navigate('SelectedProfile')}>
                             <Icon color="#FFCC00" name="chevron-thin-right" size={20} type="entypo" />               
                         </TouchableOpacity>
                         </View>
