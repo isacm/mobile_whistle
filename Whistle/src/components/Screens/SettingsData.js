@@ -22,6 +22,11 @@ var settingsData=[
     {"key" : "md-information-circle",
      "name" : "About",
      "type" : "ionicon"
+    },
+
+    { "key" : "logout",
+      "name" : "Logout",
+      "type" : "material-community"    
     }
 ]
 

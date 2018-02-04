@@ -51,8 +51,8 @@ export default class Login extends Component {
         user: resref[6].id,
         pass: resref[6].password
       })
-      if (this.state.usernameinput == this.state.user) {
-        this.props.navigation.navigate('Menu');
+      if(this.state.usernameinput == this.state.user){
+        this.reset();
       }
       else {
         this.refs.PasswordInput.setNativeProps({ text: '' })
@@ -129,7 +129,20 @@ export default class Login extends Component {
     )
   }
 
-  componentDidMount() {
+
+  reset(){
+    return this.props
+               .navigation
+               .dispatch(NavigationActions.reset(
+                 {
+                    index: 0,
+                    actions: [
+                      NavigationActions.navigate({ routeName: 'Menu'})
+                    ]
+                  }));
+  }
+
+  componentDidMount(){
     AppState.addEventListener('change', this._handleAppStateChange);
 
   }
@@ -195,7 +208,7 @@ export default class Login extends Component {
                 <Text style={styles.buttonText}>LOGIN</Text>
               </View>
             </TouchableHighlight>
-            <TouchableHighlight onPress={() => this.setModalVisible(true)} underlayColor="#FFCC00">
+            <TouchableHighlight style={styles.forgot} onPress={() => this.setModalVisible(true)} underlayColor="#FFCC00">
               <Text style={styles.inc}> Forgot your password? </Text>
             </TouchableHighlight>
           </View>
@@ -224,7 +237,7 @@ const styles = StyleSheet.create({
 
   logo: {
     flex: 1,
-    marginTop: '20%',
+    marginTop: '30%',
     aspectRatio: 2.1,
     resizeMode: 'cover'
   },
@@ -257,7 +270,7 @@ const styles = StyleSheet.create({
   buttonView: {
     marginTop: '10%',
     alignItems: 'center',
-    marginBottom: '10%'
+    marginBottom: '3%'
   },
 
   button: {
@@ -283,7 +296,7 @@ const styles = StyleSheet.create({
     opacity: 0.8
   },
   inc: {
-    marginTop: '12%',
+    marginTop: '10%',
     textAlign: 'center',
     color: 'black',
     fontSize: 15,
@@ -326,6 +339,10 @@ const styles = StyleSheet.create({
     margin: '5%',
     fontSize: 20,
     textAlign: "center"
+  },
+
+  forgot:{
+    marginTop: '1%'
   }
 })
 
