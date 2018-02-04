@@ -21,6 +21,12 @@ $ react-native run-android
 or
 $ react-native run-ios
 ```
+
+## React Navigation Setup
+```
+npm install --save react-navigation
+
+```
 ## Splash Screen Set Up
 ```
 • Create required appicon and splashicon on
