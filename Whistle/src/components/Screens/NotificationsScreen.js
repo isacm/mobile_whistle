@@ -59,7 +59,7 @@ export default class NotificationsScreen extends Component {
               this.setState({
                 guest: guestres
               })
-              var notifDetail= {date: this.state.game.date, home: this.state.home, guest: this.state.guest}
+              var notifDetail= {notificationId: result.id, date: this.state.game.date, home: this.state.home.name, guest: this.state.guest.name}
               this.state.notificationsDetails.push(notifDetail)
             })
           })
@@ -82,13 +82,13 @@ export default class NotificationsScreen extends Component {
 
     renderNotifications(item, index) {
       return (
-        <Card key={item.date} >
+        <Card key={item.notificationId} >
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('NotificationDetail')} underlayColor="#DCDCDC" >
                       <CardItem style={{backgroundColor: '#2b2b2b' }}>
                         <Left>
-                          <Icon color= "white" name="md-information-circle" size={40} type="ionicon" />
+                          <Icon color= "white" name="md-information-circle" size={30} type="ionicon" />
                           <Body>
-                            <Text style={styles.headerText}>{this.state.notificationsDetails.length}</Text>
+                            <Text style={styles.headerText}>{item.date.split('T')[0]}</Text>
                           </Body>
                         </Left>
                         <Right>
@@ -100,7 +100,7 @@ export default class NotificationsScreen extends Component {
                         <Body>
                           <Text style={styles.noteText}>COMPETIÇÃO: CNS Série A</Text>
                           <Text style ={styles.gameText}>
-                          VIANENSE FC - CANELAS FC
+                          {item.home + ' VS ' + item.guest}
                           </Text>
                           <Text style={styles.noteText}>Campo Manuel Machado, Viana do Castelo</Text>
                         </Body>
@@ -139,7 +139,7 @@ export default class NotificationsScreen extends Component {
       fontWeight: 'bold',
     },
     gameText : {
-      fontSize: 23,
+      fontSize: 18,
       fontWeight: 'bold',
       color: "#2b2b2b",
       alignItems: 'center'

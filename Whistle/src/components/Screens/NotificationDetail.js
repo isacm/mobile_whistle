@@ -5,6 +5,7 @@ import { Icon } from 'react-native-elements';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Left, Body, Right } from 'native-base';
 import api from './api';
 import Loading from '../Loading'
+import MapView, { Marker, ProviderPropType } from 'react-native-maps';
 
 export default class NotificationDetail extends Component {
     state = {loaded: false}
@@ -122,23 +123,41 @@ export default class NotificationDetail extends Component {
     }
     renderAssistent = () => {
         return(
-            <Card style={styles.assistentContainer}>
-                <View style={styles.twobuttoncontainer}>
-                    <Text style={styles.assistenttext}>  
-                    {this.state.name1}
-                    </Text>
-                
-                    <TouchableOpacity underlayColor="#dcdcdc" >
-                        <Icon color="#FFCC00" name="chevron-thin-right" size={30} type="entypo" />               
-                    </TouchableOpacity>
-                    </View>
-            </Card>
+            <Content>
+                <Card style={styles.assistentContainer}>
+                    <View style={styles.buttoncontainer}>
+                        <Text style={styles.assistenttext}>  
+                        {this.state.name1}
+                        </Text>
+                    
+                        <TouchableOpacity underlayColor="#dcdcdc" >
+                            <Icon color="#FFCC00" name="chevron-thin-right" size={20} type="entypo" />               
+                        </TouchableOpacity>
+                        </View>
+                </Card>
+            </Content>
         )
     }
     renderMap = () => {
         return (
-        <View style={{ marginTop: "5%", marginLeft: "5%" }}>
+        <View style={{ marginTop: "5%", marginLeft: "5%",}}>
             <Text style={styles.headertext}> LOCATION </Text>
+                <View style={{ alignItems: 'center' }}>
+                <MapView style={styles.map}
+                    initialRegion={{
+                    latitude: 41.69855129353962,
+                    longitude: -8.812408447265625,
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421,
+                    }}>
+                    <Marker
+                        coordinate={{
+                        latitude: 41.69855129353962,
+                        longitude:-8.812408447265625,
+                        }}>
+                    </Marker>
+                </MapView>
+                </View>
         </View>
         )
 
@@ -148,11 +167,11 @@ export default class NotificationDetail extends Component {
         <Card style={styles.cardContainer}>
             <View style={styles.twobuttoncontainer}>
                 <TouchableOpacity underlayColor="#dcdcdc">
-                    <Icon color="#FFCC00" name="check" size={40} type="evil-icons" />
+                    <Icon color="#FFCC00" name="check" size={30} type="evil-icons" />
                     <Text style={styles.buttontext} > CONFIRM </Text>
                 </TouchableOpacity>
                 <TouchableOpacity underlayColor="#dcdcdc" >
-                    <Icon color="#FFCC00" name="close" size={40} type="evil-icons" />
+                    <Icon color="#FFCC00" name="close" size={30} type="evil-icons" />
                     <Text style={styles.buttontext} > REJECT </Text>
                 </TouchableOpacity>
             </View>
@@ -197,8 +216,8 @@ export default class NotificationDetail extends Component {
                     {this.renderAssistent()}
                     {this.renderAssistent()}
                     {this.renderMap()}
-                    {/*{this.renderInitialButtons()}*/}
-                    {this.renderCancelButton()}
+                    {this.renderInitialButtons()}
+                    {/*this.renderCancelButton()*/}
                 </ScrollView>
         )
     }
@@ -212,13 +231,17 @@ export default class NotificationDetail extends Component {
         },
         buttontext: {
             color : "#FFCC00", 
-            fontSize: 20, 
+            fontSize: 15, 
             fontWeight: "bold"
         },
         buttoncancel: {
             color: "#FFCC00",
             fontSize: 15,
             fontWeight: "bold"
+        },
+        contentContainer:{
+         padding:8,
+         backgroundColor: '#1a1a1a',
         },
         viewstyle: {
             flex: 1,
@@ -238,7 +261,7 @@ export default class NotificationDetail extends Component {
         },
         headertext: {
             color: "white",
-            fontSize: 25,
+            fontSize: 20,
             fontWeight: "bold",
             marginBottom: "2%"
         },
@@ -249,13 +272,13 @@ export default class NotificationDetail extends Component {
         },
         actualtext: {
             color: "#DCDCDC",
-            fontSize: 18,
+            fontSize: 15,
             marginBottom: "2%",
             fontWeight: "bold"
         },
         teamtext: {
             color: "#DCDCDC",
-            fontSize: 22,
+            fontSize: 15,
             fontWeight: "bold"
         },
         itemcontainer: {
@@ -268,6 +291,15 @@ export default class NotificationDetail extends Component {
             backgroundColor: '#2b2b2b'
         },
         twobuttoncontainer: {
+            padding: "3%",
+            paddingLeft: "2%",
+            flex: 1,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-around',
+            backgroundColor: '#2b2b2b'
+        },
+        buttoncontainer: {
             padding: "3%",
             paddingLeft: "2%",
             flex: 1,
@@ -295,15 +327,15 @@ export default class NotificationDetail extends Component {
             borderWidth: 0,
             flex: 1,
             margin: '6%',
+            padding: 8,
             marginTop: "5%",
         },
         assistentContainer: {
             backgroundColor: '#2b2b2b',
             borderWidth: 0,
             flex: 1,
-            margin: '6%',
+            margin: '20%',
             marginTop: "4%",
-            padding: 0,
         },
         exampleImage: {
             borderColor: '#1a1a1a',
@@ -317,5 +349,10 @@ export default class NotificationDetail extends Component {
         horizontal: {
             flexDirection: 'row',
             justifyContent: 'space-around',
-          }
+          },
+
+            map: {
+                width: 300,
+                height: 250,
+            },
     })
