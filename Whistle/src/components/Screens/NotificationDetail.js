@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { StackNavigator, TabNavigator, NavigationActions} from 'react-navigation';
-import { StyleSheet, ActivityIndicator, ScrollView, Text, View, TextInput, TouchableHighlight, Alert, TouchableOpacity, Image, FlatList } from 'react-native';
+import { Platform, Linking, StyleSheet, ActivityIndicator, ScrollView, Text, View, TextInput, TouchableHighlight, Alert, TouchableOpacity, Image, FlatList } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Left, Body, Right } from 'native-base';
 import api from './api';
 import Loading from '../Loading'
 import MapView, { Marker, ProviderPropType } from 'react-native-maps';
+import { PROVIDER_GOOGLE } from 'react-native-maps';
+import openMap from 'react-native-open-maps';
 
 export default class NotificationDetail extends Component {
     state = {loaded: false}
@@ -35,6 +37,8 @@ export default class NotificationDetail extends Component {
     } 
 
     componentWillMount() {
+
+        api.getGamesByDesignation(this.props.navigation.state.params.notificationid);
         
         api.getGames().then((res) => {
             this.setState({
@@ -78,7 +82,12 @@ export default class NotificationDetail extends Component {
                         })            
             })       
     });
-}
+    }
+
+    openCorrespondingMap(lat, long) {
+        openMap({ latitude: lat, longitude: long });
+    }
+
     renderStatus = () => {
         return(
         <View style={{ marginTop: "5%", marginLeft: "5%" }}>
@@ -143,7 +152,10 @@ export default class NotificationDetail extends Component {
         <View style={{ marginTop: "5%", marginLeft: "5%",}}>
             <Text style={styles.headertext}> LOCATION </Text>
                 <View style={{ alignItems: 'center' }}>
+                <TouchableOpacity onPress={() => this.openCorrespondingMap(41.69855129353962, -8.812408447265625) }>
+
                 <MapView style={styles.map}
+                    
                     initialRegion={{
                     latitude: 41.69855129353962,
                     longitude: -8.812408447265625,
@@ -157,6 +169,7 @@ export default class NotificationDetail extends Component {
                         }}>
                     </Marker>
                 </MapView>
+                </TouchableOpacity>
                 </View>
         </View>
         )
@@ -198,6 +211,8 @@ export default class NotificationDetail extends Component {
     }
 
     render() {
+        console.log(this.props.navigation.state.params.userid);
+        console.log(this.props.navigation.state.params.notificationid);
         if(!this.state.loaded){
             return(
                 <View style={[styles.container, styles.horizontal]}>

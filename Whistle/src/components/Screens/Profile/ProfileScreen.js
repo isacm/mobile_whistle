@@ -42,6 +42,20 @@ export default class ProfileScreen extends Component {
         this.state = { text: 'profile' };
     }
 
+    onPressEmail = email => {
+      Linking.openURL(`mailto:${email}?subject=subject&body=body`).catch(err =>
+        console.log('Error:', err)
+      )
+    }
+
+    onPressTel = number => {
+      Linking.openURL(`tel:969696969`).catch(err => console.log('Error:', err))
+    }
+
+    onPressSms = () => {
+      console.log('sms')
+    }
+
     renderHeader = () => {
       {/* const {
           avatar,

@@ -6,35 +6,18 @@ import {Icon} from 'react-native-elements';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Left, Body, Right} from 'native-base';
 import { Circle, Rect } from 'react-native-svg';
 import api from './api'
+import Loading from '../Loading'
 
 export default class NotificationsScreen extends Component {
-    static navigationOptions = {
-      title : 'Notifications',
-      tabBarLabel: 'Notifications',
-      headerTintColor: 'black',
-      tabBarIcon : ({tintColor}) => ( tintColor == 'white' ?
-        <Image source={require('./ScreenImages/notifications.png')}
-                style={{width: 22, height: 22}}/>
-        :
-        <Image source={require('./ScreenImages/inactivenotifications.png')}
-                style={{width: 22, height: 22}}/>
-      ),
-      headerStyle: {
-        backgroundColor: '#FFCC00'
-      },
-      headerTitleStyle : {
-        color : '#000',
-        textAlign : 'center'
-      }
-    };
     constructor(props) {
       super(props);
       this.state = {text: 'notifications',
-                    loading: true,
+                    loaded: false,
                     notifications: [],
                     games: [],
                     game: null, 
                     notificationsDetails: []}
+      Loading.load(v => this.setState({loaded: true}));
     }
     
 
@@ -80,10 +63,46 @@ export default class NotificationsScreen extends Component {
       }
     }
 
+    renderContentLoader(){
+      return (
+        <ContentLoader primaryColor="lightgrey"
+            secondaryColor="darkgrey"
+            duration={2100}
+            height={2000}
+            width={600}>
+            <Rect x="10" y="10" rx="5" ry="5" width="60" height="65" />
+            <Rect x="75" y="15" rx="5" ry="4" width="290" height="12" />
+            <Rect x="75" y="35" rx="5" ry="4" width="290" height="12" />
+            <Rect x="75" y="55" rx="5" ry="4" width="290" height="12" />
+            <Rect x="10" y="90" rx="5" ry="5" width="60" height="65" />
+            <Rect x="75" y="95" rx="5" ry="4" width="290" height="12" />
+            <Rect x="75" y="115" rx="5" ry="4" width="290" height="12" />
+            <Rect x="75" y="135" rx="5" ry="4" width="290" height="12" />
+            <Rect x="10" y="170" rx="5" ry="5" width="60" height="65" />
+            <Rect x="75" y="175" rx="5" ry="4" width="290" height="12" />
+            <Rect x="75" y="195" rx="5" ry="4" width="290" height="12" />
+            <Rect x="75" y="215" rx="5" ry="4" width="290" height="12" />
+            <Rect x="10" y="250" rx="5" ry="5" width="60" height="65" />
+            <Rect x="75" y="255" rx="5" ry="4" width="290" height="12" />
+            <Rect x="75" y="275" rx="5" ry="4" width="290" height="12" />
+            <Rect x="75" y="295" rx="5" ry="4" width="290" height="12" />
+            <Rect x="10" y="330" rx="5" ry="5" width="60" height="65" />
+            <Rect x="75" y="335" rx="5" ry="4" width="290" height="12" />
+            <Rect x="75" y="355" rx="5" ry="4" width="290" height="12" />
+            <Rect x="75" y="375" rx="5" ry="4" width="290" height="12" />
+            <Rect x="10" y="410" rx="5" ry="5" width="60" height="65" />
+            <Rect x="75" y="415" rx="5" ry="4" width="290" height="12" />
+            <Rect x="75" y="435" rx="5" ry="4" width="290" height="12" />
+            <Rect x="75" y="455" rx="5" ry="4" width="290" height="12" />
+
+          </ContentLoader>
+      );
+    }
+
     renderNotifications(item, index) {
       return (
         <Card key={item.notificationId} >
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('NotificationDetail')} underlayColor="#DCDCDC" >
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('NotificationDetail', {notificationid : item.notificationId, userid: "AB1"})} underlayColor="#DCDCDC" >
                       <CardItem style={{backgroundColor: '#2b2b2b' }}>
                         <Left>
                           <Icon color= "white" name="md-information-circle" size={30} type="ionicon" />
@@ -111,20 +130,25 @@ export default class NotificationsScreen extends Component {
 
   
     render() {
-      console.log(this.state.notificationsDetails);
-      if(this.state.loading){
-      return ( 
-        <ScrollView style={styles.container}>
-        <Container style={styles.container}>
-          <Content style={styles.cardcontainer}>
-            {this.state.notificationsDetails.map((result, index) => {
-              return this.renderNotifications(result, index);
-            })}
-            </Content>
-        </Container>
-        </ScrollView>
-      )
-    }
+      if(!this.state.loaded){
+        return(
+            <View style={[styles.container]}>
+              {this.renderContentLoader()}
+            </View>);
+      }
+      else{
+        return ( 
+          <ScrollView style={styles.container}>
+          <Container style={styles.container}>
+            <Content style={styles.cardcontainer}>
+              {this.state.notificationsDetails.map((result, index) => {
+                return this.renderNotifications(result, index);
+              })}
+              </Content>
+          </Container>
+          </ScrollView>
+        )
+      }
     }
   }
   

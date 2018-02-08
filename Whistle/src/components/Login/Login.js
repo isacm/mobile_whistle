@@ -45,6 +45,25 @@ export default class Login extends Component {
   }
 
   _onPressButton() {
+    console.log(this.state.usernameinput + this.state.passwordinput,);
+    api.refereeExists(this.state.usernameinput, this.state.passwordinput).then((resref) => {
+      console.log(resref);
+      if(typeof resref.error === 'undefined'){
+        this.reset();}
+      else{
+        setTimeout(() => {
+          Alert.alert(
+            'Invalid credentials',
+            'Try again',
+            [
+              { text: 'OK', onPress: () => console.log('OK pressed'), style: 'cancel' }
+            ],
+            { cancelable: false })},1000)
+        }
+    })
+  }
+
+  _onPressButton2() {
     api.getReferee().then((resref) => {
       this.setState({
         referees: resref,
@@ -138,7 +157,7 @@ export default class Login extends Component {
                  {
                     index: 0,
                     actions: [
-                      NavigationActions.navigate({ routeName: 'Menu'})
+                      NavigationActions.navigate({ routeName: 'Menu',  params: {refereeid:"AB1"}})
                     ]
                   }));
   }
@@ -199,7 +218,7 @@ export default class Login extends Component {
               secureTextEntry={true}
               placeholder="PASSWORD"
               returnKeyType="done"
-              onChangeText={(text) => this.setState({ text })}
+              onChangeText={(passwordinput) => this.setState({ passwordinput })}
               value={this.state.passwordinput}
             />
           </View>

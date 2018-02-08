@@ -11,11 +11,13 @@
 #import <React/RCTPushNotificationManager.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+@import GoogleMaps;
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [GMSServices provideAPIKey:@"AIzaSyB3lVbbsxx9UCTgAoDhGvSruTQCHht2Lek"]; // add this line using the api key obtained from Google Console
   NSURL *jsCodeLocation;
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
@@ -60,5 +62,6 @@
  {
   [RCTPushNotificationManager didReceiveLocalNotification:notification];
  }
+ 
 
 @end

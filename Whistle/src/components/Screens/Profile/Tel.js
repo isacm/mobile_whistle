@@ -64,6 +64,7 @@ const Tel = ({
         <View style={styles.iconRow}>
             <Icon
               name="call"
+              underlayColor="transparent"
               iconStyle={styles.telIcon}
               onPress={() => onPressTel(number)}
             />

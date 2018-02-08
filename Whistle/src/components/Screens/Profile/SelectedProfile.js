@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as OpenAnything from 'react-native-openanything';
 import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
 import { Card, Icon } from 'react-native-elements'
 import {
@@ -16,6 +17,7 @@ import {
 import Tel from './Tel'
 import Email from './Email'
 import Separator from './Separator'
+
 
 export default class SelectedProfile extends Component {
     static navigationOptions = {
@@ -40,6 +42,18 @@ export default class SelectedProfile extends Component {
     constructor(props) {
         super(props);
         this.state = { text: 'profile' };
+    }
+
+    onPressEmail = email => {
+      OpenAnything.Email(to = false, subject = false, body = false, cc = false, bcc = false)
+    }
+
+    onPressTel = number => {
+      OpenAnything.Call('969696969', prompt = false)
+    }
+
+    onPressSms = () => {
+      OpenAnything.Text('969696969', message = false, autoEncode = true)
     }
 
     renderHeader = () => {

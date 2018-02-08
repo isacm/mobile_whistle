@@ -1,4 +1,18 @@
 var api = {
+
+    refereeExists(useremail, userpass) {
+        return (fetch('http://0.0.0.0:3000/api/Referees/login', {
+            method: 'POST',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              email: useremail,
+              password: userpass,
+            })
+        }).then((res) => res.json())
+    )},
     getGames() {
         var url = `http://localhost:3000/api/Games`;
         return fetch(url).then((res) => res.json()); 
