@@ -52,8 +52,9 @@ import SettingsScreen from './SettingsScreen';
 
 
   menuScreenNavigator.navigationOptions = ({ navigation }) => {
+    console.log(navigation.state.params.refereeid);
     return {
-      id: navigation.state.params.id,
+      id: navigation.state.params.refereeid,
     }
   };
 

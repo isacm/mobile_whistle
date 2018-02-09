@@ -15,7 +15,7 @@ export default class NotificationsScreen extends Component {
                     loaded: false,
                     notifications: [],
                     games: [],
-                    game: null, 
+                    game: null,
                     notificationsDetails: []}
       Loading.load(v => this.setState({loaded: true}));
     }
@@ -29,7 +29,7 @@ export default class NotificationsScreen extends Component {
         })
 
         this.state.notifications.map((result, index) => {
-          api.getGamesByDesignation(result.gameId).then((gameres) =>{
+          api.getGameByDesignation(result.gameId).then((gameres) =>{
             this.setState({
               game: gameres
             })
@@ -42,7 +42,7 @@ export default class NotificationsScreen extends Component {
               this.setState({
                 guest: guestres
               })
-              var notifDetail= {notificationId: result.id, date: this.state.game.date, home: this.state.home.name, guest: this.state.guest.name}
+              var notifDetail= {notificationId: result.id, gameid: result.gameId, date: this.state.game.date, home: this.state.home.name, guest: this.state.guest.name}
               this.state.notificationsDetails.push(notifDetail)
             })
           })
@@ -102,7 +102,7 @@ export default class NotificationsScreen extends Component {
     renderNotifications(item, index) {
       return (
         <Card key={item.notificationId} >
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('NotificationDetail', {notificationid : item.notificationId, userid: "AB1"})} underlayColor="#DCDCDC" >
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('NotificationDetail', {notificationid : item.notificationId, userid: "AB1", gameid: item.gameid})} underlayColor="#DCDCDC" >
                       <CardItem style={{backgroundColor: '#2b2b2b' }}>
                         <Left>
                           <Icon color= "white" name="md-information-circle" size={30} type="ionicon" />

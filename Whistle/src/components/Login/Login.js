@@ -45,12 +45,12 @@ export default class Login extends Component {
   }
 
   _onPressButton() {
-    console.log(this.state.usernameinput + this.state.passwordinput,);
     api.refereeExists(this.state.usernameinput, this.state.passwordinput).then((resref) => {
-      console.log(resref);
+
       if(typeof resref.error === 'undefined'){
         this.reset();}
       else{
+        this.refs.PasswordInput.setNativeProps({ text: '' });
         setTimeout(() => {
           Alert.alert(
             'Invalid credentials',
@@ -60,30 +60,6 @@ export default class Login extends Component {
             ],
             { cancelable: false })},1000)
         }
-    })
-  }
-
-  _onPressButton2() {
-    api.getReferee().then((resref) => {
-      this.setState({
-        referees: resref,
-        user: resref[0].id,
-        pass: resref[0].password
-      })
-      if(this.state.usernameinput == this.state.user){
-        this.reset();
-      }
-      else {
-        this.refs.PasswordInput.setNativeProps({ text: '' })
-        setTimeout(() => {
-        Alert.alert(
-          'Invalid credentials',
-          'Try again',
-          [
-            { text: 'OK', onPress: () => console.log('OK pressed'), style: 'cancel' }
-          ],
-          { cancelable: false })},1000)
-      }
     })
   }
 
@@ -375,7 +351,7 @@ const navigator = StackNavigator({
   Notifications: { screen: Notifications },
   About: { screen: About },
   NotificationDetail: { screen: NotificationDetail },
-  SelectedProfile: { screen: SelectedProfile }
+  SelectedProfile: { screen: SelectedProfile },
 })
 
 // skip this line if using Create React Native App

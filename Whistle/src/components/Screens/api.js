@@ -33,7 +33,7 @@ var api = {
         var url = `http://0.0.0.0:3000/api/Referees/` + id + `/designations`;
         return fetch(url).then((res) => res.json());
     },
-    getGamesByDesignation(id){
+    getGameByDesignation(id){
         var url = `http://0.0.0.0:3000/api/Games/` + id;
         return fetch(url).then((res) => res.json());
     }

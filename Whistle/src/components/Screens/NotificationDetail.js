@@ -26,61 +26,49 @@ export default class NotificationDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
-           games: [],
-           leagues: [],
+           gameid: null,
+           league: null,
            referees: [],
-           directors: [],
-           teamhome : [],
-           teamaway : [],
+           teamhome : null,
+           teamhomename : null,
+           teamaway : null,
+           teamawayname: null,
+           leagueid: null,
+           leaguename: null,
+           latitude: null,
+           longitude: null
         }  
         Loading.load(v => this.setState({loaded: true}));
     } 
 
     componentWillMount() {
 
-        api.getGamesByDesignation(this.props.navigation.state.params.notificationid);
-        
-        api.getGames().then((res) => {
+        api.getGameByDesignation(this.props.navigation.state.params.gameid).then((gameres) => {
             this.setState({
-                games: res,
-                gamedate: res[0].date.split('T')[0],
-                gamehour: res[0].date.split('T')[1].split('.')[0],
-                teamhome: res[0].home_teamId,
-                teamaway: res[0].guest_teamId,
-                referee: res[0].referee_id[0]
+                gamedate: gameres.date.split('T')[0],
+                gamehour: gameres.date.split('T')[1].split('.')[0],
+                teamhome: gameres.home_teamId,
+                teamaway: gameres.guest_teamId,
             })
-            console.log("RESREF " + this.state.referee)
-
-            api.getReferee().then((resref) => {
-                this.setState({
-                    referees: resref,
-                    name1: resref[0].username
-                })
-                console.log("RESREF " + this.state.referees)
-            })
-
-          
-
             api.getTeam(this.state.teamhome).then((reshome) => {
                 this.setState({
-                    teamhome: reshome,
-                    homename: reshome.name
+                    teamhomename: reshome.name,
+                    longitude: reshome.localization.lng,
+                    latitude: reshome.localization.lat,
+                    leagueid: reshome.leagueId,
                 })
+                api.getLeagues(this.state.leagueid).then((resleague) => {
+                    this.setState({
+                        leaguename: resleague.name,
+                    })
+                }) 
             })
             api.getTeam(this.state.teamaway).then((resaway) => {
                 this.setState({
-                    teamaway: resaway,
-                    awayname: resaway.name,
-                    leaguename: resaway.leagueId
+                    teamawayname: resaway.name,
                 })
-
-                        api.getLeagues(this.state.leaguename).then((resleague) => {
-                            this.setState({
-                                leagues: resleague,
-                                nameleague: resleague.name
-                            })
-                        })            
-            })       
+            })    
+                              
     });
     }
 
@@ -117,9 +105,9 @@ export default class NotificationDetail extends Component {
         return(
         <View style={{ marginTop: "5%", marginLeft: "5%" }}>
             <Text style={styles.headertext}> GAME </Text>
-            <Text style={styles.actualtext}> League: {this.state.nameleague} </Text>
-                <Text style={styles.teamtext}> H: {this.state.homename} </Text>
-                <Text style={styles.teamtext}> A: {this.state.awayname} </Text>
+            <Text style={styles.actualtext}> League: {this.state.leaguename} </Text>
+                <Text style={styles.teamtext}> H: {this.state.teamhomename} </Text>
+                <Text style={styles.teamtext}> A: {this.state.teamawayname} </Text>
         </View> 
         )
     }
@@ -152,20 +140,20 @@ export default class NotificationDetail extends Component {
         <View style={{ marginTop: "5%", marginLeft: "5%",}}>
             <Text style={styles.headertext}> LOCATION </Text>
                 <View style={{ alignItems: 'center' }}>
-                <TouchableOpacity onPress={() => this.openCorrespondingMap(41.69855129353962, -8.812408447265625) }>
+                <TouchableOpacity onPress={() => this.openCorrespondingMap(this.state.latitude, this.state.longitude) }>
 
                 <MapView style={styles.map}
                     
                     initialRegion={{
-                    latitude: 41.69855129353962,
-                    longitude: -8.812408447265625,
+                    latitude: this.state.latitude,
+                    longitude: this.state.longitude,
                     latitudeDelta: 0.0922,
                     longitudeDelta: 0.0421,
                     }}>
                     <Marker
                         coordinate={{
-                        latitude: 41.69855129353962,
-                        longitude:-8.812408447265625,
+                        latitude: this.state.latitude,
+                        longitude: this.state.longitude,
                         }}>
                     </Marker>
                 </MapView>
