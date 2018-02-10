@@ -21,8 +21,8 @@ var api = {
         var url = `http://localhost:3000/api/Leagues/` + id;
         return fetch(url).then((res) => res.json());
     },
-    getReferee() {
-        var url = `http://localhost:3000/api/Referees/`;
+    getReferee(id) {
+        var url = `http://localhost:3000/api/Referees/` + id;
         return fetch(url).then((res) => res.json());
     },
     getTeam(id) {
@@ -35,6 +35,10 @@ var api = {
     },
     getGameByDesignation(id){
         var url = `http://0.0.0.0:3000/api/Games/` + id;
+        return fetch(url).then((res) => res.json());
+    },
+    getDesignationsByGameid(id){
+        var url = `http://0.0.0.0:3000/api/Games/` + id + `/designations`;
         return fetch(url).then((res) => res.json());
     }
 };

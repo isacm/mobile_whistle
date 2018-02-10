@@ -96,7 +96,6 @@ Tel.propTypes = {
   containerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
   index: PropTypes.string.isRequired,
   name: PropTypes.string,
-  number: PropTypes.string.isRequired,
   onPressSms: PropTypes.func.isRequired,
   onPressTel: PropTypes.func.isRequired,
 }

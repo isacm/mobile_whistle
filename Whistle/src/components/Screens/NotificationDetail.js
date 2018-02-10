@@ -36,7 +36,9 @@ export default class NotificationDetail extends Component {
            leagueid: null,
            leaguename: null,
            latitude: null,
-           longitude: null
+           longitude: null,
+           gamenotifications: [],
+           referees: [],
         }  
         Loading.load(v => this.setState({loaded: true}));
     } 
@@ -68,19 +70,35 @@ export default class NotificationDetail extends Component {
                     teamawayname: resaway.name,
                 })
             })    
-                              
-    });
+        });
+        api.getDesignationsByGameid(this.props.navigation.state.params.gameid).then((notifications) => {
+            this.setState({
+                gamenotifications : notifications
+            })
+            this.state.gamenotifications.map((result, index) => {
+                if(this.props.navigation.state.params.notificationid != result.id){
+                    api.getReferee(result.refereeId).then((referee) => {
+                            this.state.referees.push(referee);
+                    })
+                }
+            })
+        });
     }
 
     openCorrespondingMap(lat, long) {
         openMap({ latitude: lat, longitude: long });
     }
 
+    status(){
+        if(this.props.navigation.state.params.status){ return 'ACCEPTED'}
+        else{ return 'AWAITING RESPONSE'}
+    }
+
     renderStatus = () => {
         return(
         <View style={{ marginTop: "5%", marginLeft: "5%" }}>
             <Text style={styles.headertext}> STATUS </Text>
-            <Text style={styles.actualtext}> AWAITING RESPONSE </Text>
+            <Text style={styles.actualtext}> {this.status()} </Text>
         </View>)
     }
     renderDate = () => {
@@ -118,16 +136,16 @@ export default class NotificationDetail extends Component {
         </View> 
         )
     }
-    renderAssistent = () => {
+    renderAssistent(result, index) {
         return(
-            <Content>
+            <Content key={result.id}>
                 <Card style={styles.assistentContainer}>
                     <View style={styles.buttoncontainer}>
                         <Text style={styles.assistenttext}>  
-                        {this.state.name1}
+                        {result.username}
                         </Text>
                     
-                        <TouchableOpacity underlayColor="#dcdcdc" onPress={() => this.props.navigation.navigate('SelectedProfile')}>
+                        <TouchableOpacity underlayColor="#dcdcdc" onPress={() => this.props.navigation.navigate('SelectedProfile', {assistentid: result.id})}>
                             <Icon color="#FFCC00" name="chevron-thin-right" size={20} type="entypo" />               
                         </TouchableOpacity>
                         </View>
@@ -216,8 +234,8 @@ export default class NotificationDetail extends Component {
                     {this.renderHour()}
                     {this.renderGame()}
                     {this.renderEntourage()}
-                    {this.renderAssistent()}
-                    {this.renderAssistent()}
+                    {this.state.referees.map((result, index) => {
+                        return this.renderAssistent(result, index)})}
                     {this.renderMap()}
                     {this.renderInitialButtons()}
                     {/*this.renderCancelButton()*/}
