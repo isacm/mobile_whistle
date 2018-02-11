@@ -16,6 +16,7 @@ import {
 import Tel from './Tel'
 import Email from './Email'
 import Separator from './Separator'
+import api from '../api'
 
 export default class ProfileScreen extends Component {
     static navigationOptions = {
@@ -38,9 +39,24 @@ export default class ProfileScreen extends Component {
         }
     };
     constructor(props) {
-        super(props);
-        this.state = { text: 'profile' };
-    }
+      super(props);
+      this.state = { text: 'profile',
+            name: null,
+            address: null,
+            mobile: null,
+            mail: null };
+  }
+
+  componentWillMount() {
+    api.getReferee("AB1").then((assistentres) => {
+        this.setState({
+          name: assistentres.username,
+          address: assistentres.address,
+          mobile: assistentres.phoneNumber,
+          mail: assistentres.email
+        })
+    })
+  }
 
     onPressEmail = email => {
       Linking.openURL(`mailto:${email}?subject=subject&body=body`).catch(err =>
@@ -68,7 +84,7 @@ export default class ProfileScreen extends Component {
           <View style={styles.headerContainer}>
              <View style={styles.headerColumn}>
               <Image style={styles.userImage} source={require('../ScreenImages/nelsonparente.png')}/>
-            <Text style={styles.userNameText}>Nelson Parente</Text>
+            <Text style={styles.userNameText}>{this.state.name}</Text>
                 <View style={styles.userAddressRow}>
                   <View>
                     <Icon
@@ -79,7 +95,7 @@ export default class ProfileScreen extends Component {
                   </View>
                   <View style={styles.userCityRow}>
                     <Text style={styles.userCityText}>
-                      Viana do Castelo, Portugal  {/*{city}, {country}*/}
+                      {this.state.address}  {/*{city}, {country}*/}
                     </Text>
                   </View>
               </View>
@@ -100,7 +116,7 @@ export default class ProfileScreen extends Component {
                   key='bbb'
                   index='0'
                   name='email'
-                  email='sunga.nelso@ebay.com'
+                  email={this.state.mail}
                   onPressEmail={this.onPressEmail}
                 />
           </View>
@@ -118,7 +134,7 @@ export default class ProfileScreen extends Component {
                 key='aaa'
                 index='0'
                 name='mobile'
-                number='969696969'
+                number={this.state.mobile}
                 onPressSms={this.onPressSms}
                 onPressTel={this.onPressTel}
               />
