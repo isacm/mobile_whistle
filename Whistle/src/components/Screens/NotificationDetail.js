@@ -94,6 +94,14 @@ export default class NotificationDetail extends Component {
         else{ return 'AWAITING RESPONSE'}
     }
 
+    acceptNomination(){
+        api.acceptDesignation(this.props.navigation.state.params.notificationid);
+    }
+
+    rejectNomination(){
+        api.refuseDesignation(this.props.navigation.state.params.notificationid);
+    }
+
     renderStatus = () => {
         return(
         <View style={{ marginTop: "5%", marginLeft: "5%" }}>
@@ -185,11 +193,11 @@ export default class NotificationDetail extends Component {
         return(
         <Card style={styles.cardContainer}>
             <View style={styles.twobuttoncontainer}>
-                <TouchableOpacity underlayColor="#dcdcdc">
+                <TouchableOpacity underlayColor="#dcdcdc" onPress={() => this.acceptNomination()}>
                     <Icon color="#FFCC00" name="check" size={30} type="evil-icons" />
                     <Text style={styles.buttontext} > CONFIRM </Text>
                 </TouchableOpacity>
-                <TouchableOpacity underlayColor="#dcdcdc" >
+                <TouchableOpacity underlayColor="#dcdcdc" onPress={() => this.rejectNomination()}>
                     <Icon color="#FFCC00" name="close" size={30} type="evil-icons" />
                     <Text style={styles.buttontext} > REJECT </Text>
                 </TouchableOpacity>

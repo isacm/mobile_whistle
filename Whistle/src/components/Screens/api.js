@@ -40,6 +40,31 @@ var api = {
     getDesignationsByGameid(id){
         var url = `http://0.0.0.0:3000/api/Games/` + id + `/designations`;
         return fetch(url).then((res) => res.json());
+    },
+    acceptDesignation(id){
+        return (fetch('http://0.0.0.0:3000/api/Designations/' + id, {
+            method: 'PATCH',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                isAccepted: true,
+            })
+        }).then((res) => res.json()))
+    
+    },
+    refuseDesignation(id){
+        return (fetch('http://0.0.0.0:3000/api/Designations/' + id, {
+            method: 'PATCH',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                isAccepted: false,
+            })
+        }).then((res) => res.json()))
     }
 };
 
