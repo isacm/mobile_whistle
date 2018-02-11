@@ -27,7 +27,7 @@ export default class NotificationsScreen extends Component {
         this.setState({
           notifications: res
         })
-
+        console.log(this.state.notifications);
         this.state.notifications.map((result, index) => {
           api.getGameByDesignation(result.gameId).then((gameres) =>{
             this.setState({

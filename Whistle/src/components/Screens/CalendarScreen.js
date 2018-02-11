@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, TextInput, Button, TouchableHighlight, Alert, T
 import ContentLoader from 'react-native-content-loader';
 import { Circle, Rect } from 'react-native-svg';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+import api from './api'
 
 
 export default class CalendarScreen extends Component {
@@ -31,7 +32,31 @@ export default class CalendarScreen extends Component {
     super(props);
     this.state = { text: 'calendar',
                    loading: true,
-                   items: {} };
+                   items: {},
+                   notifications: [],
+                   games: [],
+                   game: null };
+  }
+
+  componentWillMount() {
+    api.getDesignationsByRefereeId('AB1').then((res) =>{
+      this.setState({
+        notifications: res
+      })
+    
+      console.log(this.state.notifications);
+      this.state.notifications.map((result, index) => {
+        if(!result.isAccepted){
+          api.getGameByDesignation(result.gameId).then((gameres) =>{
+            this.setState({
+              game: gameres
+            })
+            this.state.games.push(gameres);
+          })
+        }
+      })
+    })
+    console.log(this.state.games);
   }
 
   state = { index: 0 }
