@@ -342,7 +342,6 @@ export default class NotificationDetail extends Component {
         }
         else{
         return (
-                //{this.newRender()}
                 <ScrollView style={styles.container}>
                     {this.renderModal()}
                     {this.renderStatus()}
@@ -473,24 +472,16 @@ export default class NotificationDetail extends Component {
             flex: 1,
             margin: '20%',
             marginTop: "4%",
-        },
-        exampleImage: {
-            borderColor: '#1a1a1a',
-            backgroundColor: '#1a1a1a',
-            justifyContent: 'center',
-            borderWidth: 3,
-            height: 220,
-            width: "80%",
-        },
-     
+        },   
         horizontal: {
             flexDirection: 'row',
             justifyContent: 'space-around',
           },
 
         map: {
-            width: 300,
-            height: 250,
+            marginTop: '5%',
+            width: 380,
+            height: 200,
         },
 
         rejectInputSection: {

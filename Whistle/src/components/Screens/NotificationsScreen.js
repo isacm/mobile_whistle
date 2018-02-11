@@ -65,35 +65,29 @@ export default class NotificationsScreen extends Component {
 
     renderContentLoader(){
       return (
-        <ContentLoader primaryColor="lightgrey"
-            secondaryColor="darkgrey"
-            duration={2100}
+        <ContentLoader primaryColor="#2b2b2b"
+            secondaryColor="#1a1a1a"
+            duration={2000}
             height={2000}
             width={600}>
-            <Rect x="10" y="10" rx="5" ry="5" width="60" height="65" />
-            <Rect x="75" y="15" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="35" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="55" rx="5" ry="4" width="290" height="12" />
-            <Rect x="10" y="90" rx="5" ry="5" width="60" height="65" />
-            <Rect x="75" y="95" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="115" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="135" rx="5" ry="4" width="290" height="12" />
-            <Rect x="10" y="170" rx="5" ry="5" width="60" height="65" />
-            <Rect x="75" y="175" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="195" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="215" rx="5" ry="4" width="290" height="12" />
-            <Rect x="10" y="250" rx="5" ry="5" width="60" height="65" />
-            <Rect x="75" y="255" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="275" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="295" rx="5" ry="4" width="290" height="12" />
-            <Rect x="10" y="330" rx="5" ry="5" width="60" height="65" />
-            <Rect x="75" y="335" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="355" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="375" rx="5" ry="4" width="290" height="12" />
-            <Rect x="10" y="410" rx="5" ry="5" width="60" height="65" />
-            <Rect x="75" y="415" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="435" rx="5" ry="4" width="290" height="12" />
-            <Rect x="75" y="455" rx="5" ry="4" width="290" height="12" />
+            <Rect x="10" y="30" rx="5" ry="5" width="80" height="100" />
+            <Rect x="100" y="35" rx="5" ry="4" width="265" height="12" />
+            <Rect x="100" y="55" rx="5" ry="4" width="265" height="12" />
+            <Rect x="100" y="75" rx="5" ry="4" width="265" height="12" />
+            <Rect x="10" y="160" rx="5" ry="5" width="80" height="100" />
+            <Rect x="100" y="165" rx="5" ry="4" width="265" height="12" />
+            <Rect x="100" y="185" rx="5" ry="4" width="265" height="12" />
+            <Rect x="100" y="205" rx="5" ry="4" width="265" height="12" />
+            <Rect x="10" y="290" rx="5" ry="5" width="80" height="100" />
+            <Rect x="100" y="295" rx="5" ry="4" width="265" height="12" />
+            <Rect x="100" y="315" rx="5" ry="4" width="265" height="12" />
+            <Rect x="100" y="335" rx="5" ry="4" width="265" height="12" />
+            <Rect x="10" y="420" rx="5" ry="5" width="80" height="100" />
+            <Rect x="100" y="425" rx="5" ry="4" width="265" height="12" />
+            <Rect x="100" y="445" rx="5" ry="4" width="265" height="12" />
+            <Rect x="100" y="465" rx="5" ry="4" width="265" height="12" />
+                
+          
 
           </ContentLoader>
       );
@@ -130,13 +124,13 @@ export default class NotificationsScreen extends Component {
 
   
     render() {
-      if(!this.state.loaded){
+       if(!this.state.loaded){
         return(
             <View style={[styles.container]}>
               {this.renderContentLoader()}
             </View>);
-      }
-      else{
+        }
+       else{
         return ( 
           <ScrollView style={styles.container}>
           <Container style={styles.container}>
