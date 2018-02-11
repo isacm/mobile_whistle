@@ -23,7 +23,7 @@ export default class NotificationsScreen extends Component {
 
     componentWillMount() {
 
-      api.getDesignationsByRefereeId('AB1').then((res) =>{
+      api.getDesignationsByRefereeId('5a74b09292f00d13dde6a099').then((res) =>{
         this.setState({
           notifications: res
         })
@@ -102,7 +102,7 @@ export default class NotificationsScreen extends Component {
     renderNotifications(item, index) {
       return (
         <Card key={item.notificationId} >
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('NotificationDetail', {notificationid : item.notificationId, userid: "AB1", gameid: item.gameid, status: item.isaccepted})} underlayColor="#DCDCDC" >
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('NotificationDetail', { notificationid: item.notificationId, userid: "5a74b09292f00d13dde6a099", gameid: item.gameid, status: item.isaccepted})} underlayColor="#DCDCDC" >
                       <CardItem style={{backgroundColor: '#2b2b2b' }}>
                         <Left>
                           <Icon color= "white" name="md-information-circle" size={30} type="ionicon" />

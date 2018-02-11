@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StackNavigator, TabNavigator, NavigationActions} from 'react-navigation';
-import { Platform, Linking, StyleSheet, ActivityIndicator, ScrollView, Text, View, TextInput, TouchableHighlight, Alert, TouchableOpacity, Image, FlatList } from 'react-native';
+import { Platform, Linking, StyleSheet, Modal, ActivityIndicator, ScrollView, Text, View, TextInput, TouchableHighlight, Alert, TouchableOpacity, Image, FlatList } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Left, Body, Right } from 'native-base';
 import api from './api';
@@ -26,6 +26,9 @@ export default class NotificationDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
+           justificationinput: "",
+           rejectinput: "",
+           modalVisible: false, 
            gameid: null,
            league: null,
            referees: [],
@@ -44,11 +47,11 @@ export default class NotificationDetail extends Component {
     } 
 
     componentWillMount() {
-
+        console.log(api.getGameByDesignation(this.props.navigation.state.params.gameid));
         api.getGameByDesignation(this.props.navigation.state.params.gameid).then((gameres) => {
             this.setState({
-                gamedate: gameres.date.split('T')[0],
-                gamehour: gameres.date.split('T')[1].split('.')[0],
+                gamedate: gameres.date,
+                gamehour: gameres.hora,
                 teamhome: gameres.home_teamId,
                 teamaway: gameres.guest_teamId,
             })
@@ -85,6 +88,14 @@ export default class NotificationDetail extends Component {
         });
     }
 
+    setModalVisible(visible) {
+        this.setState({ modalVisible: visible });
+    }
+
+    _pressAcceptReason() {
+        this.setModalVisible(false);
+    }
+
     openCorrespondingMap(lat, long) {
         openMap({ latitude: lat, longitude: long });
     }
@@ -93,6 +104,64 @@ export default class NotificationDetail extends Component {
         if(this.props.navigation.state.params.status){ return 'ACCEPTED'}
         else{ return 'AWAITING RESPONSE'}
     }
+
+    acceptNomination() {
+        api.acceptDesignation(this.props.navigation.state.params.notificationid).then((resnot) =>{
+
+        if (typeof resnot.error === 'undefined') {
+            setTimeout(() => {
+                Alert.alert(
+                    'Confirmed',
+                    'Please inform if your availability changes',
+                    [
+                        { text: 'OK', onPress: () => console.log('OK pressed'), style: 'cancel' }
+                    ],
+                    { cancelable: false })
+            }, 200)
+        }
+        else {
+            setTimeout(() => {
+                Alert.alert(
+                    'Something went wrong',
+                    'Try again',
+                    [
+                        { text: 'OK', onPress: () => console.log('OK pressed'), style: 'cancel' }
+                    ],
+                    { cancelable: false })
+            }, 200)
+        }
+    })
+    }
+
+    rejectNomination(string) {
+        api.refuseDesignation(this.props.navigation.state.params.notificationid, string).then((resnot) => {
+
+
+        if (typeof resnot.error === 'undefined') {
+            setTimeout(() => {
+                Alert.alert(
+                    'Submitted',
+                    'Your nomination was cancelled',
+                    [
+                        { text: 'OK', onPress: () => console.log('OK pressed'), style: 'cancel' }
+                    ],
+                    { cancelable: false })
+            }, 200)
+        }
+        else {
+            setTimeout(() => {
+                Alert.alert(
+                    'Something went wrong',
+                    'Try again',
+                    [
+                        { text: 'OK', onPress: () => console.log('OK pressed'), style: 'cancel' }
+                    ],
+                    { cancelable: false })
+            }, 200)
+        }
+    })
+}
+
 
     renderStatus = () => {
         return(
@@ -132,7 +201,7 @@ export default class NotificationDetail extends Component {
     renderEntourage = () => {
         return(
         <View style={{ marginTop: "5%", marginLeft: "5%" }}>
-            <Text style={styles.headertext}> ASSISTENTS </Text>
+            <Text style={styles.headertext}> ASSISTANTS </Text>
         </View> 
         )
     }
@@ -181,15 +250,61 @@ export default class NotificationDetail extends Component {
         )
 
     }
+
+    renderModal = () => {
+
+        return (
+
+            <Modal
+                animationType={"slide"}
+                transparent={true}
+                visible={this.state.modalVisible}
+                onRequestClose={() => { alert("Modal has been closed.") }}>
+                <View style={styles.modalContainer}>
+                    <View style={styles.modalView}>
+                        <View style={styles.modalHeader}>
+                            <Text style={styles.headermodal}>Reject Nomination</Text>
+                        </View>
+                        <View style={styles.modalBody}>
+                            <TextInput underlineColorAndroid='transparent'
+                                ref="RejectInput"
+                                autoCorrect={false}
+                                style={styles.rejectInputSection}
+                                blurOnSubmit={false}
+                                autoFocus={true}
+                                multiline={true}
+                                autoCapitalize="none"
+                                keyboardType="email-address"
+                                placeholder="REASON"
+                                returnKeyType="default"
+                                onChangeText={(rejectinput) => this.setState({ rejectinput })}
+                                value={this.state.rejectinput}
+                                onSubmitEditing={(event) => { this.setModalVisible(!this.state.modalVisible) }}
+                            />
+                        </View>
+                        <TouchableOpacity style={styles.modalButtons} onPress={() => { this.setModalVisible(!this.state.modalVisible), this.rejectNomination(this.state.rejectinput) }} underlayColor="#2b2b2b">
+                            <Icon color="white" name="mail" size={50} type="entypo" />
+                        </TouchableOpacity>
+                        <View style={styles.modalFooter}>
+                            <TouchableOpacity style={styles.modalButtons} onPress={() => { this.setModalVisible(!this.state.modalVisible) }} underlayColor="#2b2b2b">
+                                <Icon color="white" name="chevron-thin-down" size={30} type="entypo" />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
+            </Modal>
+        )
+    }
+
     renderInitialButtons = () => {
         return(
         <Card style={styles.cardContainer}>
             <View style={styles.twobuttoncontainer}>
-                <TouchableOpacity underlayColor="#dcdcdc">
+                    <TouchableOpacity onPress={() => this.acceptNomination()} underlayColor="#dcdcdc">
                     <Icon color="#FFCC00" name="check" size={30} type="evil-icons" />
                     <Text style={styles.buttontext} > CONFIRM </Text>
                 </TouchableOpacity>
-                <TouchableOpacity underlayColor="#dcdcdc" >
+                <TouchableOpacity onPress={() => this.setModalVisible(true)} underlayColor="#dcdcdc" >
                     <Icon color="#FFCC00" name="close" size={30} type="evil-icons" />
                     <Text style={styles.buttontext} > REJECT </Text>
                 </TouchableOpacity>
@@ -229,6 +344,7 @@ export default class NotificationDetail extends Component {
         return (
                 //{this.newRender()}
                 <ScrollView style={styles.container}>
+                    {this.renderModal()}
                     {this.renderStatus()}
                     {this.renderDate()}
                     {this.renderHour()}
@@ -372,8 +488,59 @@ export default class NotificationDetail extends Component {
             justifyContent: 'space-around',
           },
 
-            map: {
-                width: 300,
-                height: 250,
-            },
+        map: {
+            width: 300,
+            height: 250,
+        },
+
+        rejectInputSection: {
+            width: '90%',
+            padding: '5%',
+            alignItems: 'center',
+            textAlign: 'center',
+            alignSelf: 'center',
+            backgroundColor: 'white',
+            borderRadius: 10
+        },
+
+        modalContainer: {
+            backgroundColor: '#1a1a1a',
+            marginTop: '30%',
+            margin: 15,
+
+        },
+
+        modalView: {
+        },
+
+        modalBody: {
+            margin: '5%',
+            flexDirection: 'column',
+            alignItems: "center",
+            marginBottom: 60,
+            borderRadius: 30,
+        },
+
+        modalFooter: {
+            margin: '5%',
+        },
+
+        text: {
+            margin: '8%',
+            fontSize: 20,
+            color: 'white'
+        },
+
+        separator: {
+            flex: 1,
+            height: StyleSheet.hairlineWidth,
+            backgroundColor: '#8E8E8E',
+        },
+
+        headermodal: {
+            color: 'white',
+            margin: '5%',
+            fontSize: 20,
+            textAlign: "center"
+        },
     })
