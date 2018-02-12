@@ -260,6 +260,8 @@ export default class NotificationDetail extends Component {
                 transparent={true}
                 visible={this.state.modalVisible}
                 onRequestClose={() => { alert("Modal has been closed.") }}>
+                <View style={styles.overlay}>
+
                 <View style={styles.modalContainer}>
                     <View style={styles.modalView}>
                         <View style={styles.modalHeader}>
@@ -291,6 +293,7 @@ export default class NotificationDetail extends Component {
                             <Icon color="white" name="send" size={40} type="material-icons" />
                         </TouchableOpacity>
                     </View>
+                </View>
                 </View>
                 </View>
             </Modal>
@@ -544,4 +547,13 @@ export default class NotificationDetail extends Component {
             fontWeight: 'bold',
             textAlign: "center"
         },
+
+        overlay: {
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            backgroundColor: 'rgba(0,0,0,0.8)'
+        }
     })

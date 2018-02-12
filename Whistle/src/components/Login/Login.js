@@ -83,15 +83,16 @@ export default class Login extends Component {
   mountModal() {
     
     return(
-
     <Modal
       animationType={"slide"}
       transparent={true}
       visible={this.state.modalVisible}
       onRequestClose={() => { alert("Modal has been closed.") }}
     >
-      <View style={styles.modalContainer}>
-        <View style={styles.modalView}>
+        <View style={styles.overlay}>
+
+        <View style={styles.modalContainer}>
+          <View style={styles.modalView}>
           <View style={styles.modalHeader}>
             <Text style={styles.headermodal}>Recover Password</Text>
           </View>
@@ -120,10 +121,14 @@ export default class Login extends Component {
                   <Icon color="white" name="send" size={40} type="material-icons" />
                 </TouchableOpacity>
               </View>
+              </View>
             </View>
+
         </View>
       </View>
+
     </Modal>
+
     )
   }
 
@@ -265,7 +270,7 @@ const styles = StyleSheet.create({
   },
 
   buttonView: {
-    marginTop: '10%',
+    marginTop: '7%',
     alignItems: 'center',
     marginBottom: '3%'
   },
@@ -356,6 +361,15 @@ const styles = StyleSheet.create({
     marginBottom: '10%'
 
   },
+
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'rgba(0,0,0,0.8)'
+  }
 })
 
 const navigator = StackNavigator({
