@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, TextInput, Button, TouchableHighlight, Alert, T
 import ContentLoader from 'react-native-content-loader';
 import { Circle, Rect } from 'react-native-svg';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+import api from './api'
 
 
 export default class CalendarScreen extends Component {
@@ -31,20 +32,47 @@ export default class CalendarScreen extends Component {
     super(props);
     this.state = { text: 'calendar',
                    loading: true,
-                   items: {} };
+                   items: {},
+                   notifications: [],
+                   games: [],
+                   game: null };
+  }
+
+  componentWillMount() {
+    api.getDesignationsByRefereeId('AB1').then((res) =>{
+      this.setState({
+        notifications: res
+      })
+    
+      console.log(this.state.notifications);
+      this.state.notifications.map((result, index) => {
+        if(result.isAccepted){
+          api.getGameByDesignation(result.gameId).then((gameres) =>{
+            this.setState({
+              game: gameres
+            })
+            this.state.games.push(gameres);
+          })
+          console.log(this.state.games);
+        }
+      })
+    })
+    
   }
 
   state = { index: 0 }
   updateIndex = (index) => { this.setState({ index }) }
 
   render() {
+    var today = new Date();
+    var date= parseInt(today.getMonth()+1) + "-"+  today.getDate() +"-"+ today.getFullYear();
     return (
       <View style={styles.container}>
         <Agenda
           style={styles.container}
           items={this.state.items}
           loadItemsForMonth={this.loadItems.bind(this)}
-          selected={'2017-05-16'}
+          selected={date}
           renderItem={this.renderItem.bind(this)}
           renderEmptyDate={this.renderEmptyDate.bind(this)}
           rowHasChanged={this.rowHasChanged.bind(this)}
@@ -94,7 +122,7 @@ export default class CalendarScreen extends Component {
           }
         }
       }
-      //console.log(this.state.items);
+      console.log('item' + this.state.items);
       const newItems = {};
       Object.keys(this.state.items).forEach(key => {newItems[key] = this.state.items[key];});
       this.setState({
