@@ -276,6 +276,7 @@ export default class NotificationDetail extends Component {
                                 autoFocus={true}
                                 multiline={true}
                                 placeholder="REASON"
+                                placeholderTextColor="#FFF" 
                                 returnKeyType="done"
                                 onChangeText={(rejectinput) => this.setState({ rejectinput })}
                                 value={this.state.rejectinput}
@@ -500,8 +501,9 @@ export default class NotificationDetail extends Component {
             width: '90%',
             padding: '6%',
             textAlign: 'center',
+            color: '#FFFFFF',
             textAlignVertical: 'top',
-            backgroundColor: 'white',
+            backgroundColor: '#2b2b2b',
             borderRadius: 5
         },
 

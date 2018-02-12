@@ -106,6 +106,7 @@ export default class Login extends Component {
                 autoCapitalize="none"
                 keyboardType="email-address"
                 placeholder="EMAIL"
+                placeholderTextColor="#FFF" 
                 returnKeyType="default"
                 onChangeText={(recoveryinput) => this.setState({ recoveryinput })}
                 value={this.state.recoveryinput}
@@ -264,8 +265,9 @@ const styles = StyleSheet.create({
     width: '94%',
     padding: '6%',
     textAlign: 'center',
+    color: 'white',
     textAlignVertical: 'top',
-    backgroundColor: 'white',
+    backgroundColor: '#2b2b2b',
     borderRadius: 5
   },
 
@@ -279,7 +281,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: '2%',
     justifyContent: 'center',
-    backgroundColor: '#1a1a00',
+    backgroundColor: '#1a1a1a',
     paddingHorizontal: '30%'
   },
 
@@ -300,7 +302,7 @@ const styles = StyleSheet.create({
   inc: {
     marginTop: '10%',
     textAlign: 'center',
-    color: 'black',
+    color: '#1a1a1a',
     fontSize: 15,
   },
   modalContainer: {
