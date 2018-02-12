@@ -46,30 +46,33 @@ export default class CalendarScreen extends Component {
     
       console.log(this.state.notifications);
       this.state.notifications.map((result, index) => {
-        if(!result.isAccepted){
+        if(result.isAccepted){
           api.getGameByDesignation(result.gameId).then((gameres) =>{
             this.setState({
               game: gameres
             })
             this.state.games.push(gameres);
           })
+          console.log(this.state.games);
         }
       })
     })
-    console.log(this.state.games);
+    
   }
 
   state = { index: 0 }
   updateIndex = (index) => { this.setState({ index }) }
 
   render() {
+    var today = new Date();
+    var date= parseInt(today.getMonth()+1) + "-"+  today.getDate() +"-"+ today.getFullYear();
     return (
       <View style={styles.container}>
         <Agenda
           style={styles.container}
           items={this.state.items}
           loadItemsForMonth={this.loadItems.bind(this)}
-          selected={'2017-05-16'}
+          selected={date}
           renderItem={this.renderItem.bind(this)}
           renderEmptyDate={this.renderEmptyDate.bind(this)}
           rowHasChanged={this.rowHasChanged.bind(this)}
@@ -119,7 +122,7 @@ export default class CalendarScreen extends Component {
           }
         }
       }
-      //console.log(this.state.items);
+      console.log('item' + this.state.items);
       const newItems = {};
       Object.keys(this.state.items).forEach(key => {newItems[key] = this.state.items[key];});
       this.setState({
