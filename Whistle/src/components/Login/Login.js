@@ -117,7 +117,7 @@ export default class Login extends Component {
                 <TouchableOpacity style={styles.modalButtons} onPress={() => { this.setModalVisible(!this.state.modalVisible) }} underlayColor="#2b2b2b">
                   <Icon color="white" name="close" size={40} type="MaterialCommunityIcons" />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.modalButtons} onPress={() => { this.setModalVisible(!this.state.modalVisible), this.rejectNomination(this.state.rejectinput) }} underlayColor="#2b2b2b">
+                <TouchableOpacity style={styles.modalButtons} onPress={() => { this.setModalVisible(!this.state.modalVisible), this.timealert() }} underlayColor="#2b2b2b">
                   <Icon color="white" name="send" size={40} type="material-icons" />
                 </TouchableOpacity>
               </View>
