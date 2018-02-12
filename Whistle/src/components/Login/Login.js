@@ -111,14 +111,16 @@ export default class Login extends Component {
                 onSubmitEditing={(event) => {this.setModalVisible(!this.state.modalVisible) }}
               />
           </View>
-            <TouchableOpacity style={styles.modalButtons} onPress={() => {this.setModalVisible(!this.state.modalVisible), this.timealert()}} underlayColor="#2b2b2b">
-              <Icon color="white" name="mail" size={50} type="entypo" />
-            </TouchableOpacity>
-          <View style={styles.modalFooter}>
-            <TouchableOpacity style={styles.modalButtons} onPress={() => { this.setModalVisible(!this.state.modalVisible) }} underlayColor="#2b2b2b">
-                <Icon color="white" name="chevron-thin-down" size={30} type="entypo" />
-            </TouchableOpacity>
-          </View>
+            <View style={styles.modalFooter}>
+              <View style={styles.modalbuttoncontainer}>
+                <TouchableOpacity style={styles.modalButtons} onPress={() => { this.setModalVisible(!this.state.modalVisible) }} underlayColor="#2b2b2b">
+                  <Icon color="white" name="close" size={40} type="MaterialCommunityIcons" />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.modalButtons} onPress={() => { this.setModalVisible(!this.state.modalVisible), this.rejectNomination(this.state.rejectinput) }} underlayColor="#2b2b2b">
+                  <Icon color="white" name="send" size={40} type="material-icons" />
+                </TouchableOpacity>
+              </View>
+            </View>
         </View>
       </View>
     </Modal>
@@ -133,7 +135,7 @@ export default class Login extends Component {
                  {
                     index: 0,
                     actions: [
-                      NavigationActions.navigate({ routeName: 'Menu',  params: {refereeid:"AB1"}})
+                      NavigationActions.navigate({ routeName: 'Menu', params: { refereeid:"5a74b09292f00d13dde6a099"}})
                     ]
                   }));
   }
@@ -254,13 +256,12 @@ const styles = StyleSheet.create({
   },
 
   recoverInputSection: {
-    width: '90%',
-    padding: '5%',
-    alignItems: 'center',
+    width: '94%',
+    padding: '6%',
     textAlign: 'center',
-    alignSelf: 'center',
+    textAlignVertical: 'top',
     backgroundColor: 'white',
-    borderRadius: 10
+    borderRadius: 5
   },
 
   buttonView: {
@@ -310,9 +311,7 @@ const styles = StyleSheet.create({
   modalBody: {
     margin: '5%',
     flexDirection: 'column',
-    alignItems: "center",
-    marginBottom: 60,
-    borderRadius: 30,
+    alignItems: "center"
   },
 
   modalFooter: {
@@ -334,12 +333,29 @@ const styles = StyleSheet.create({
     color: 'white',
     margin: '5%',
     fontSize: 20,
+    fontWeight: 'bold',
     textAlign: "center"
   },
 
   forgot:{
     marginTop: '1%'
-  }
+  },
+
+  modalbuttoncontainer: {
+    padding: "3%",
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    backgroundColor: '#1a1a1a'
+  },
+
+  modalFooter: {
+    margin: '5%',
+    marginTop: '5%',
+    marginBottom: '10%'
+
+  },
 })
 
 const navigator = StackNavigator({

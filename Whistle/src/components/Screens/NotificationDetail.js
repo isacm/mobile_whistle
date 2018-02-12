@@ -263,34 +263,35 @@ export default class NotificationDetail extends Component {
                 <View style={styles.modalContainer}>
                     <View style={styles.modalView}>
                         <View style={styles.modalHeader}>
-                            <Text style={styles.headermodal}>Reject Nomination</Text>
+                            <Text style={styles.headermodal}>Submit your justification</Text>
                         </View>
                         <View style={styles.modalBody}>
                             <TextInput underlineColorAndroid='transparent'
                                 ref="RejectInput"
-                                autoCorrect={false}
+                                autoCorrect={true}
                                 style={styles.rejectInputSection}
                                 blurOnSubmit={false}
                                 autoFocus={true}
                                 multiline={true}
-                                autoCapitalize="none"
-                                keyboardType="email-address"
                                 placeholder="REASON"
-                                returnKeyType="default"
+                                returnKeyType="done"
                                 onChangeText={(rejectinput) => this.setState({ rejectinput })}
                                 value={this.state.rejectinput}
                                 onSubmitEditing={(event) => { this.setModalVisible(!this.state.modalVisible) }}
                             />
                         </View>
-                        <TouchableOpacity style={styles.modalButtons} onPress={() => { this.setModalVisible(!this.state.modalVisible), this.rejectNomination(this.state.rejectinput) }} underlayColor="#2b2b2b">
-                            <Icon color="white" name="mail" size={50} type="entypo" />
-                        </TouchableOpacity>
-                        <View style={styles.modalFooter}>
-                            <TouchableOpacity style={styles.modalButtons} onPress={() => { this.setModalVisible(!this.state.modalVisible) }} underlayColor="#2b2b2b">
-                                <Icon color="white" name="chevron-thin-down" size={30} type="entypo" />
-                            </TouchableOpacity>
-                        </View>
+
                     </View>
+                    <View style={styles.modalFooter}>
+                    <View style={styles.modalbuttoncontainer}>
+                        <TouchableOpacity style={styles.modalButtons} onPress={() => { this.setModalVisible(!this.state.modalVisible) }} underlayColor="#2b2b2b">
+                            <Icon color="white" name="close" size={40} type="MaterialCommunityIcons" />                        
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.modalButtons} onPress={() => { this.setModalVisible(!this.state.modalVisible), this.rejectNomination(this.state.rejectinput) }} underlayColor="#2b2b2b">
+                            <Icon color="white" name="send" size={40} type="material-icons" />
+                        </TouchableOpacity>
+                    </View>
+                </View>
                 </View>
             </Modal>
         )
@@ -435,6 +436,14 @@ export default class NotificationDetail extends Component {
             justifyContent: 'space-around',
             backgroundColor: '#2b2b2b'
         },
+        modalbuttoncontainer: {
+            padding: "3%",
+            flex: 1,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-around',
+            backgroundColor: '#1a1a1a'
+        },
         buttoncontainer: {
             padding: "3%",
             paddingLeft: "2%",
@@ -486,18 +495,17 @@ export default class NotificationDetail extends Component {
 
         rejectInputSection: {
             width: '90%',
-            padding: '5%',
-            alignItems: 'center',
+            padding: '6%',
             textAlign: 'center',
-            alignSelf: 'center',
+            textAlignVertical: 'top',
             backgroundColor: 'white',
-            borderRadius: 10
+            borderRadius: 5
         },
 
         modalContainer: {
             backgroundColor: '#1a1a1a',
             marginTop: '30%',
-            margin: 15,
+            margin: 10,
 
         },
 
@@ -505,15 +513,22 @@ export default class NotificationDetail extends Component {
         },
 
         modalBody: {
-            margin: '5%',
-            flexDirection: 'column',
             alignItems: "center",
-            marginBottom: 60,
+            marginTop: '2%',
+            paddingLeft: 5,
+            flexDirection: 'column',
+            marginBottom: '2%',
+            justifyContent: 'center',
+            marginBottom: 20,
             borderRadius: 30,
+
         },
 
         modalFooter: {
             margin: '5%',
+            marginTop: '5%',
+            marginBottom: '10%'
+
         },
 
         text: {
@@ -522,16 +537,11 @@ export default class NotificationDetail extends Component {
             color: 'white'
         },
 
-        separator: {
-            flex: 1,
-            height: StyleSheet.hairlineWidth,
-            backgroundColor: '#8E8E8E',
-        },
-
         headermodal: {
             color: 'white',
             margin: '5%',
             fontSize: 20,
+            fontWeight: 'bold',
             textAlign: "center"
         },
     })
