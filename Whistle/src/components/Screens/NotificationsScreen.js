@@ -23,7 +23,7 @@ export default class NotificationsScreen extends Component {
 
     componentWillMount() {
 
-      api.getDesignationsByRefereeId('5a74b09292f00d13dde6a099').then((res) =>{
+      api.getDesignationsByRefereeId('AB1').then((res) =>{
         this.setState({
           notifications: res
         })

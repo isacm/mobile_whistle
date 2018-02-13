@@ -51,7 +51,7 @@ export default class NotificationDetail extends Component {
         api.getGameByDesignation(this.props.navigation.state.params.gameid).then((gameres) => {
             this.setState({
                 gamedate: gameres.date,
-                gamehour: gameres.hora,
+                gamehour: gameres.time,
                 teamhome: gameres.home_teamId,
                 teamaway: gameres.guest_teamId,
             })
@@ -78,6 +78,7 @@ export default class NotificationDetail extends Component {
             this.setState({
                 gamenotifications : notifications
             })
+            
             this.state.gamenotifications.map((result, index) => {
                 if(this.props.navigation.state.params.notificationid != result.id){
                     api.getReferee(result.refereeId).then((referee) => {
