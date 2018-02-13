@@ -125,7 +125,7 @@ export default class SettingsScreen extends Component {
     },
 
     itemcontainer:{
-      padding : "3%",
+      padding : "2%",
       paddingLeft : "2%",
       flex: 1,
       flexDirection: 'row',

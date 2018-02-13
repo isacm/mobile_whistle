@@ -1,5 +1,5 @@
 export default class Loading{
     static load(cb){
-        setTimeout(cb, 1500);
+        setTimeout(cb, 3000);
     }
 }

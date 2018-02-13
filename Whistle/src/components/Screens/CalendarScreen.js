@@ -35,11 +35,14 @@ export default class CalendarScreen extends Component {
                    items: {},
                    notifications: [],
                    games: [],
-                   game: null };
+                   game: null,
+                   home: null,
+                   away: null,
+                   gamesByDay: [] };
   }
 
   componentWillMount() {
-    api.getDesignationsByRefereeId('5a74b09292f00d13dde6a099').then((res) =>{
+    api.getDesignationsByRefereeId('AB1').then((res) =>{
       this.setState({
         notifications: res
       })
@@ -51,9 +54,16 @@ export default class CalendarScreen extends Component {
             this.setState({
               game: gameres
             })
-            this.state.games.push(gameres);
+            api.getTeam(this.state.game.home_teamId).then((homeres) => {
+              home: homeres.name
+            })
+            api.getTeam(this.state.game.guest_teamId).then((guestres) => {
+              away: guestres.name
+            })
+            console.log(this.state.game)
+            var gameDet= {date: this.state.game.date, time: this.state.game.time.substring(0, 5), home: this.state.home, guest: this.state.away }
+            this.state.games.push(gameDet);
           })
-          console.log(this.state.games);
         }
       })
     })
@@ -72,7 +82,7 @@ export default class CalendarScreen extends Component {
           style={styles.container}
           items={this.state.items}
           loadItemsForMonth={this.loadItems.bind(this)}
-          selected={date}
+          selected={'01-30-2018'}
           renderItem={this.renderItem.bind(this)}
           renderEmptyDate={this.renderEmptyDate.bind(this)}
           rowHasChanged={this.rowHasChanged.bind(this)}
@@ -108,19 +118,25 @@ export default class CalendarScreen extends Component {
 
   loadItems(day) {
     setTimeout(() => {
-      for (let i = -15; i < 85; i++) {
+      for (let i = -50; i < 85; i++) {
         const time = day.timestamp + i * 24 * 60 * 60 * 1000;
         const strTime = this.timeToString(time);
-        if (!this.state.items[strTime]) {
-          this.state.items[strTime] = [];
-          const numItems = Math.floor(Math.random() * 5);
-          for (let j = 0; j < numItems; j++) {
-            this.state.items[strTime].push({
-              name: 'Item for ' + strTime,
-              height: Math.max(50, Math.floor(Math.random() * 150))
-            });
+        this.state.games.map((result, index) => { 
+          if(result.date == strTime){
+            this.state.gamesByDay.push(result);
           }
-        }
+        })
+        this.state.items[strTime] = [];
+        this.state.gamesByDay.map((result, index) => {
+            this.state.items[strTime].push({
+              hour: result.time,
+              home: result.home,
+              guest: result.guest,
+              height: Math.max(50, 100)
+            });
+        })
+        this.state.gamesByDay = [];
+        console.log(this.state.gamesByDay);
       }
       console.log('item' + this.state.items);
       const newItems = {};
@@ -134,13 +150,15 @@ export default class CalendarScreen extends Component {
 
   renderItem(item) {
     return (
-      <View style={[styles.item, {height: item.height}]}><Text>{item.name}</Text></View>
+      <View style={[styles.item, {height: item.height}]}><Text style={styles.hour}>{item.hour}</Text>
+      <Text style={styles.hour}>{item.home}</Text>
+      <Text style={styles.hour}>{item.guest}</Text></View>
     );
   }
 
   renderEmptyDate() {
     return (
-      <View style={styles.emptyDate}><Text>This is empty date!</Text></View>
+      <View style={styles.emptyDate}><Text>You have no games on this day!</Text></View>
     );
   }
 
@@ -167,11 +185,16 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginRight: 10,
-    marginTop: 17
+    marginTop: 17,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   emptyDate: {
     height: 15,
     flex:1,
     paddingTop: 30
-  }
+  },
+  hour: {
+    padding: 5
+  },
 });
