@@ -114,7 +114,7 @@ export default class NotificationDetail extends Component {
 
     status(){
         if (this.state.notstate) { return 'ACCEPTED' }
-        if ((!this.state.notstate) && (this.state.notjustification == "")) { return 'AWAITING RESPONSE' }
+        if ((!this.state.notstate) && (this.state.notjustification === undefined)) { return 'AWAITING RESPONSE' }
         else { return 'REJECTED' }
     }
 
@@ -350,7 +350,7 @@ export default class NotificationDetail extends Component {
 
     renderVariableButtons = () => {
 
-        if ((!this.state.notstate) && (this.state.notjustification == "")){
+        if ((!this.state.notstate) && (this.state.notjustification === undefined)){
             return(this.renderInitialButtons())
         } 
         else {
