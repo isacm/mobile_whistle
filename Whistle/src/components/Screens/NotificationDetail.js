@@ -183,7 +183,7 @@ export default class NotificationDetail extends Component {
                     'Confirmed',
                     'Please inform if your availability changes',
                     [
-                        { text: 'OK', onPress: () => console.log('OK pressed'), style: 'cancel' }
+                        { text: 'OK', onPress: () => this._onRefresh(), style: 'cancel' }
                     ],
                     { cancelable: false })
             }, 200)
@@ -194,7 +194,7 @@ export default class NotificationDetail extends Component {
                     'Something went wrong',
                     'Try again',
                     [
-                        { text: 'OK', onPress: () => console.log('OK pressed'), style: 'cancel' }
+                        { text: 'OK', onPress: () => this._onRefresh(), style: 'cancel' }
                     ],
                     { cancelable: false })
             }, 200)
@@ -212,7 +212,7 @@ export default class NotificationDetail extends Component {
                     'Submitted',
                     'Your nomination was cancelled',
                     [
-                        { text: 'OK', onPress: () => console.log('OK pressed'), style: 'cancel' }
+                        { text: 'OK', onPress: () => this._onRefresh(), style: 'cancel' }
                     ],
                     { cancelable: false })
             }, 200)
@@ -223,7 +223,7 @@ export default class NotificationDetail extends Component {
                     'Something went wrong',
                     'Try again',
                     [
-                        { text: 'OK', onPress: () => console.log('OK pressed'), style: 'cancel' }
+                        { text: 'OK', onPress: () => this._onRefresh(), style: 'cancel' }
                     ],
                     { cancelable: false })
             }, 200)
