@@ -46,8 +46,7 @@ export default class CalendarScreen extends Component {
       this.setState({
         notifications: res
       })
-    
-      console.log(this.state.notifications);
+
       this.state.notifications.map((result, index) => {
         if(result.isAccepted){
           api.getGameByDesignation(result.gameId).then((gameres) =>{
@@ -55,14 +54,18 @@ export default class CalendarScreen extends Component {
               game: gameres
             })
             api.getTeam(this.state.game.home_teamId).then((homeres) => {
-              home: homeres.name
+              this.setState({
+                home: homeres.name
+              })
+              api.getTeam(this.state.game.guest_teamId).then((guestres) => {
+                this.setState({
+                  away: guestres.name
+              
+                })
+                var gameDet= {notid: result.id, gameid: result.gameId, isAccepted: result.isAccepted, date: this.state.game.date, time: this.state.game.time.substring(0, 5), home: this.state.home, guest: this.state.away }
+                this.state.games.push(gameDet);
+              })
             })
-            api.getTeam(this.state.game.guest_teamId).then((guestres) => {
-              away: guestres.name
-            })
-            console.log(this.state.game)
-            var gameDet= {date: this.state.game.date, time: this.state.game.time.substring(0, 5), home: this.state.home, guest: this.state.away }
-            this.state.games.push(gameDet);
           })
         }
       })
@@ -129,6 +132,9 @@ export default class CalendarScreen extends Component {
         this.state.items[strTime] = [];
         this.state.gamesByDay.map((result, index) => {
             this.state.items[strTime].push({
+              notid: result.notid,
+              gameid: result.gameid,
+              isAccepted: result.isAccepted,
               hour: result.time,
               home: result.home,
               guest: result.guest,
@@ -136,9 +142,7 @@ export default class CalendarScreen extends Component {
             });
         })
         this.state.gamesByDay = [];
-        console.log(this.state.gamesByDay);
       }
-      console.log('item' + this.state.items);
       const newItems = {};
       Object.keys(this.state.items).forEach(key => {newItems[key] = this.state.items[key];});
       this.setState({
@@ -150,15 +154,24 @@ export default class CalendarScreen extends Component {
 
   renderItem(item) {
     return (
-      <View style={[styles.item, {height: item.height}]}><Text style={styles.hour}>{item.hour}</Text>
-      <Text style={styles.hour}>{item.home}</Text>
-      <Text style={styles.hour}>{item.guest}</Text></View>
+      <TouchableOpacity onPress={() => this.props.navigation.navigate('NotificationDetail', { notificationid: item.notid, userid: "AB1", gameid: item.gameid, status: item.isaccepted})}>
+        <View style={[styles.item, {height: item.height}]} key={item.notid}>
+          <View style={styles.viewhour}>
+            <Text style={styles.hour}>{item.hour}</Text>
+          </View>
+          <View style={styles.teams}>
+            <Text style={styles.hour}>{item.home}</Text>
+            <Text style={styles.hour}>VS</Text>
+            <Text style={styles.hour}>{item.guest}</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
     );
   }
 
   renderEmptyDate() {
     return (
-      <View style={styles.emptyDate}><Text>You have no games on this day!</Text></View>
+      <View style={styles.emptyDate}><Text style={styles.empty}>You have no games on this day!</Text></View>
     );
   }
 
@@ -192,9 +205,21 @@ const styles = StyleSheet.create({
   emptyDate: {
     height: 15,
     flex:1,
-    paddingTop: 30
+    paddingTop: 30,
   },
   hour: {
     padding: 5
   },
+  viewhour:{
+    width: '30%'
+  },
+  teams:{
+    width: '70%',
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center'
+  },
+  empty:{
+    color: 'white'
+  }
 });
