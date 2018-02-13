@@ -14,8 +14,12 @@ export default class NotificationsScreen extends Component {
       this.state = {text: 'notifications',
                     loaded: false,
                     notifications: [],
+                    leaguename: null,
                     games: [],
                     game: null,
+                    stadiumname: null,
+                    homeleague: null,
+                    leagueid: null,
                     notificationsDetails: []}
       Loading.load(v => this.setState({loaded: true}));
     }
@@ -23,11 +27,10 @@ export default class NotificationsScreen extends Component {
 
     componentWillMount() {
 
-      api.getDesignationsByRefereeId('AB1').then((res) =>{
+      api.getDesignationsByRefereeId('5a74b09292f00d13dde6a099').then((res) =>{
         this.setState({
           notifications: res
         })
-        console.log(this.state.notifications);
         this.state.notifications.map((result, index) => {
           api.getGameByDesignation(result.gameId).then((gameres) =>{
             this.setState({
@@ -35,7 +38,14 @@ export default class NotificationsScreen extends Component {
             })
             api.getTeam(this.state.game.home_teamId).then((homeres) =>{
               this.setState({
-                home: homeres
+                home: homeres,
+                leagueid: homeres.leagueId,
+                stadiumname: homeres.stadium
+              })
+              api.getLeagues(this.state.leagueid).then((resleague) => {
+                this.setState({
+                  leaguename: resleague.name,
+                })
               })
             })
             api.getTeam(this.state.game.guest_teamId).then((guestres) =>{
@@ -111,11 +121,11 @@ export default class NotificationsScreen extends Component {
                       </TouchableOpacity>
                       <CardItem style={{ backgroundColor: '#FFCC00'}}>
                         <Body>
-                          <Text style={styles.noteText}>COMPETIÇÃO: CNS Série A</Text>
+                          <Text style={styles.noteText}>LEAGUE | {this.state.leaguename} </Text>
                           <Text style ={styles.gameText}>
-                          {item.home + ' VS ' + item.guest}
+                          {item.home + ' - ' + item.guest}
                           </Text>
-                          <Text style={styles.noteText}>Campo Manuel Machado, Viana do Castelo</Text>
+                          <Text style={styles.noteText}>{this.state.stadiumname}</Text>
                         </Body>
                       </CardItem>
                 </Card>
@@ -157,7 +167,7 @@ export default class NotificationsScreen extends Component {
       fontWeight: 'bold',
     },
     gameText : {
-      fontSize: 18,
+      fontSize: 20,
       fontWeight: 'bold',
       color: "#2b2b2b",
       alignItems: 'center'

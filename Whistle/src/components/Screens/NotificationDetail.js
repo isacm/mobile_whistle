@@ -43,7 +43,8 @@ export default class NotificationDetail extends Component {
            gamenotifications: [],
            referees: [],
            notstate: null,
-           notjustification: null
+           notjustification: null,
+           stadiumname: null
         }  
         Loading.load(v => this.setState({loaded: true}));
     } 
@@ -63,6 +64,7 @@ export default class NotificationDetail extends Component {
                     longitude: reshome.localization.lng,
                     latitude: reshome.localization.lat,
                     leagueid: reshome.leagueId,
+                    stadiumname: reshome.stadium
                 })
                 api.getLeagues(this.state.leagueid).then((resleague) => {
                     this.setState({
@@ -203,9 +205,9 @@ export default class NotificationDetail extends Component {
         return(
         <View style={{ marginTop: "5%", marginLeft: "5%" }}>
             <Text style={styles.headertext}> GAME </Text>
-            <Text style={styles.actualtext}> League: {this.state.leaguename} </Text>
-                <Text style={styles.teamtext}> H: {this.state.teamhomename} </Text>
-                <Text style={styles.teamtext}> A: {this.state.teamawayname} </Text>
+            <Text style={styles.actualtext}> League | {this.state.leaguename} </Text>
+                <Text style={styles.teamtext}> H | {this.state.teamhomename} </Text>
+                <Text style={styles.teamtext}> A | {this.state.teamawayname} </Text>
         </View> 
         )
     }
@@ -221,10 +223,7 @@ export default class NotificationDetail extends Component {
             <Content key={result.id}>
                 <Card style={styles.assistentContainer}>
                     <View style={styles.buttoncontainer}>
-                        <Text style={styles.assistenttext}>  
-                        {result.username}
-                        </Text>
-                    
+                        <Text style={styles.assistenttext}>{result.username}</Text>
                         <TouchableOpacity underlayColor="#dcdcdc" onPress={() => this.props.navigation.navigate('SelectedProfile', {assistentid: result.id})}>
                             <Icon color="#FFCC00" name="chevron-thin-right" size={20} type="entypo" />               
                         </TouchableOpacity>
@@ -237,6 +236,8 @@ export default class NotificationDetail extends Component {
         return (
         <View style={{ marginTop: "5%", marginLeft: "5%",}}>
             <Text style={styles.headertext}> LOCATION </Text>
+                <Text style={styles.actualtext}> {this.state.stadiumname} </Text> 
+
                 <View style={{ alignItems: 'center' }}>
                 <TouchableOpacity onPress={() => this.openCorrespondingMap(this.state.latitude, this.state.longitude) }>
 
@@ -363,6 +364,8 @@ export default class NotificationDetail extends Component {
     }
 
     render() {
+        console.log(this.props.navigation.state.params.stadiumname);
+
         console.log(this.props.navigation.state.params.userid);
         console.log(this.props.navigation.state.params.notificationid);
         if(!this.state.loaded){
@@ -444,7 +447,7 @@ export default class NotificationDetail extends Component {
         },
         teamtext: {
             color: "#DCDCDC",
-            fontSize: 15,
+            fontSize: 20,
             fontWeight: "bold"
         },
         itemcontainer: {
