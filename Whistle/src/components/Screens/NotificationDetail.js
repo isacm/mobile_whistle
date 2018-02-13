@@ -42,6 +42,8 @@ export default class NotificationDetail extends Component {
            longitude: null,
            gamenotifications: [],
            referees: [],
+           notstate: null,
+           notjustification: null
         }  
         Loading.load(v => this.setState({loaded: true}));
     } 
@@ -78,15 +80,23 @@ export default class NotificationDetail extends Component {
             this.setState({
                 gamenotifications : notifications
             })
-            this.state.gamenotifications.map((result, index) => {
+            this.state.gamenotifications.map((result, index) => {    
                 if(this.props.navigation.state.params.notificationid != result.id){
                     api.getReferee(result.refereeId).then((referee) => {
                             this.state.referees.push(referee);
                     })
+                } else {
+                    this.setState({
+                        notstate: result.isAccepted,
+                        notjustification: result.justification
+                    })
                 }
             })
         });
+   
     }
+
+    
 
     setModalVisible(visible) {
         this.setState({ modalVisible: visible });
@@ -321,11 +331,11 @@ export default class NotificationDetail extends Component {
 
     renderCancelButton = () => {
         return ( 
-        <TouchableOpacity underlayColor="#dcdcdc">
+            <TouchableOpacity onPress={() => this.setModalVisible(true)} underlayColor="#dcdcdc">
             <Card style={styles.cardContainer}>
                 <View style={styles.itemcontainer}>
                     <View style={styles.icomcontainer}>
-                        <Icon color="#FFCC00" name="block" size={50} type="material-icons" />
+                        <Icon color="#FFCC00" name="block" size={40} type="material-icons" />
                     </View>
                     <View style={styles.namecontainer}>
                         <Text style={styles.items}> CANCEL CONFIRMATION </Text>
@@ -334,6 +344,21 @@ export default class NotificationDetail extends Component {
             </Card>
         </TouchableOpacity>
         )
+    }
+
+    renderVariableButtons = () => {
+
+        if ((!this.state.notstate) && (this.state.notjustification == "")){
+            return(this.renderInitialButtons())
+        } 
+        else {
+            if ((this.state.notstate)) {
+                return(this.renderCancelButton())
+            }  
+            else {
+                return(<View/>)
+            }
+        } 
     }
 
     render() {
@@ -357,8 +382,7 @@ export default class NotificationDetail extends Component {
                     {this.state.referees.map((result, index) => {
                         return this.renderAssistent(result, index)})}
                     {this.renderMap()}
-                    {this.renderInitialButtons()}
-                    {/*this.renderCancelButton()*/}
+                    {this.renderVariableButtons()}
                 </ScrollView>
         )
     }
@@ -469,7 +493,7 @@ export default class NotificationDetail extends Component {
             paddingLeft: "5%",
             justifyContent: 'center',
             textAlign: 'center',
-            color: '#DCDCDC'
+            color: '#FFCC00'
         },
         cardContainer: {
             backgroundColor: '#2b2b2b',
