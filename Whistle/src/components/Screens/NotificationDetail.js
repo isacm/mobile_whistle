@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StackNavigator, TabNavigator, NavigationActions} from 'react-navigation';
-import { Platform, Linking, StyleSheet, Modal, ActivityIndicator, ScrollView, Text, View, TextInput, TouchableHighlight, Alert, TouchableOpacity, Image, FlatList } from 'react-native';
+import { RefreshControl, Platform, Linking, StyleSheet, Modal, ActivityIndicator, ScrollView, Text, View, TextInput, TouchableHighlight, Alert, TouchableOpacity, Image, FlatList } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Left, Body, Right } from 'native-base';
 import api from './api';
@@ -26,6 +26,7 @@ export default class NotificationDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
+           refreshing: false,
            justificationinput: "",
            rejectinput: "",
            modalVisible: false, 
@@ -50,6 +51,61 @@ export default class NotificationDetail extends Component {
     } 
 
     componentWillMount() {
+        console.log(api.getGameByDesignation(this.props.navigation.state.params.gameid));
+        api.getGameByDesignation(this.props.navigation.state.params.gameid).then((gameres) => {
+            this.setState({
+                gamedate: gameres.date,
+                gamehour: gameres.time,
+                teamhome: gameres.home_teamId,
+                teamaway: gameres.guest_teamId,
+            })
+            api.getTeam(this.state.teamhome).then((reshome) => {
+                this.setState({
+                    teamhomename: reshome.name,
+                    longitude: reshome.localization.lng,
+                    latitude: reshome.localization.lat,
+                    leagueid: reshome.leagueId,
+                    stadiumname: reshome.stadium
+                })
+                api.getLeagues(this.state.leagueid).then((resleague) => {
+                    this.setState({
+                        leaguename: resleague.name,
+                    })
+                }) 
+            })
+            api.getTeam(this.state.teamaway).then((resaway) => {
+                this.setState({
+                    teamawayname: resaway.name,
+                })
+            })    
+        });
+        api.getDesignationsByGameid(this.props.navigation.state.params.gameid).then((notifications) => {
+            this.setState({
+                gamenotifications : notifications
+            })
+            this.state.gamenotifications.map((result, index) => {    
+                if(this.props.navigation.state.params.notificationid != result.id){
+                    api.getReferee(result.refereeId).then((referee) => {
+                            this.state.referees.push(referee);
+                    })
+                } else {
+                    this.setState({
+                        notstate: result.isAccepted,
+                        notjustification: result.justification
+                    })
+                }
+            })
+        });
+   
+    }
+
+    _onRefresh() {
+        this.setState({refreshing: true});
+        this.refresh();
+        this.setState({refreshing: false});
+      }
+
+    refresh(){
         console.log(api.getGameByDesignation(this.props.navigation.state.params.gameid));
         api.getGameByDesignation(this.props.navigation.state.params.gameid).then((gameres) => {
             this.setState({
@@ -376,7 +432,13 @@ export default class NotificationDetail extends Component {
         }
         else{
         return (
-                <ScrollView style={styles.container}>
+                <ScrollView style={styles.container}
+                refreshControl={
+                    <RefreshControl
+                      refreshing={this.state.refreshing}
+                      onRefresh={this._onRefresh.bind(this)}
+                    />
+                  }>
                     {this.renderModal()}
                     {this.renderStatus()}
                     {this.renderDate()}

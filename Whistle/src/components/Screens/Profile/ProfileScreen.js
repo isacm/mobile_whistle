@@ -48,7 +48,7 @@ export default class ProfileScreen extends Component {
   }
 
   componentWillMount() {
-    api.getReferee("5a74b09292f00d13dde6a099").then((assistentres) => {
+    api.getReferee("AB1").then((assistentres) => {
         this.setState({
           name: assistentres.username,
           address: assistentres.address,

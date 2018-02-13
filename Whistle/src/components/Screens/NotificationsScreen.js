@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StackNavigator, TabNavigator, NavigationActions} from 'react-navigation';
-import { StyleSheet, ActivityIndicator, Text, View, TextInput, Button, TouchableHighlight, Alert, TouchableOpacity, Image, ScrollView} from 'react-native';
+import { RefreshControl, StyleSheet, ActivityIndicator, Text, View, TextInput, Button, TouchableHighlight, Alert, TouchableOpacity, Image, ScrollView} from 'react-native';
 import ContentLoader from 'react-native-content-loader';
 import {Icon} from 'react-native-elements';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Left, Body, Right} from 'native-base';
@@ -12,8 +12,10 @@ export default class NotificationsScreen extends Component {
     constructor(props) {
       super(props);
       this.state = {text: 'notifications',
+                    refreshing: false,
                     loaded: false,
                     notifications: [],
+                    notificationsRefreshed: [],
                     leaguename: null,
                     games: [],
                     game: null,
@@ -27,7 +29,7 @@ export default class NotificationsScreen extends Component {
 
     componentWillMount() {
 
-      api.getDesignationsByRefereeId('5a74b09292f00d13dde6a099').then((res) =>{
+      api.getDesignationsByRefereeId('AB1').then((res) =>{
         this.setState({
           notifications: res
         })
@@ -60,6 +62,56 @@ export default class NotificationsScreen extends Component {
       });
 
 
+    }
+
+    _onRefresh() {
+      this.setState({refreshing: true});
+      this.refresh();
+      this.setState({refreshing: false});
+    }
+
+    refresh(){
+      api.getDesignationsByRefereeId('AB1').then((res) =>{
+        this.setState({
+          notificationsrefreshed: res
+        })
+        this.state.notificationsrefreshed.map((resultrefreshed, indexrefreshed) => {
+          this.state.notifications.map((result, index) => {
+            if(result.id == resultrefreshed.id){
+              this.state.notificationsRefreshed.splice(indexrefreshed, 1);
+              //this.state.notificationsrefreshed.remove(indexrefreshed);
+            }
+          })
+        })
+        if(this.state.notificationsRefreshed.length!=0){
+          this.state.notificationsrefreshed.map((result, index) => {
+            api.getGameByDesignation(result.gameId).then((gameres) =>{
+              this.setState({
+                game: gameres
+              })
+              api.getTeam(this.state.game.home_teamId).then((homeres) =>{
+                this.setState({
+                  home: homeres,
+                  leagueid: homeres.leagueId,
+                  stadiumname: homeres.stadium
+                })
+                api.getLeagues(this.state.leagueid).then((resleague) => {
+                  this.setState({
+                    leaguename: resleague.name,
+                  })
+                })
+              })
+              api.getTeam(this.state.game.guest_teamId).then((guestres) =>{
+                this.setState({
+                  guest: guestres
+                })
+                var notifDetail= {notificationId: result.id, gameid: result.gameId, date: this.state.game.date, home: this.state.home.name, guest: this.state.guest.name}
+                this.state.notificationsDetails.push(notifDetail)
+              })
+            })
+          })
+        }
+      })
     }
 
     getGameInfo(){
@@ -142,7 +194,12 @@ export default class NotificationsScreen extends Component {
         }
        else{
         return ( 
-          <ScrollView style={styles.container}>
+          <ScrollView style={styles.container}refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh.bind(this)}
+            />
+          }>
           <Container style={styles.container}>
             <Content style={styles.cardcontainer}>
               {this.state.notificationsDetails.map((result, index) => {
