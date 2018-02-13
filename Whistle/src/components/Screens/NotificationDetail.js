@@ -111,8 +111,9 @@ export default class NotificationDetail extends Component {
     }
 
     status(){
-        if(this.props.navigation.state.params.status){ return 'ACCEPTED'}
-        else{ return 'AWAITING RESPONSE'}
+        if (this.state.notstate) { return 'ACCEPTED' }
+        if ((!this.state.notstate) && (this.state.notjustification == "")) { return 'AWAITING RESPONSE' }
+        else { return 'REJECTED' }
     }
 
     acceptNomination() {
