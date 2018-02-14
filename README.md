@@ -1,11 +1,47 @@
 # Whistle
-## Simulation Environment setup
+
+• Mobile application to help referees manage their nominations and quickly respond to one
+
+• It is part of an larger product containing an web application and an dedicated API
+
+• Developed as the project for the University of Minho's course, Projecto em Engenharia Informática 2017/2018
+
+## Getting Started
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
+### Prerequisites
+
+• Xcode (macOS exclusive) : https://itunes.apple.com/us/app/xcode/id497799835?mt=12
+
+• Android Studio : https://developer.android.com/studio/index.html
+
+#### Node
+```
+$ brew install node
+```
+#### Watchman
+```
+$ brew install watchman
+```
+
+#### The React Native CLI
+```
+npm install -g react-native-cli
+```
+### Simulation Environment setup
+
+#### Enable iOS Simulator (macOS exclusive)
 
 ```
-• Enable iOS Simulator on Xcode
-Preferences > Locations > Enable Command Line Tools
+Open Xcode
 
-• Enable Android Studio Simulator
+Preferences > Locations > Enable Command Line Tools
+```
+
+#### Enable Android Studio Simulator
+```
+Follow instructions here:
+
 facebook.github.io/react-native/docs/getting-started.html
 
 ```
