@@ -6,7 +6,10 @@
 
 • Developed as the project for the University of Minho's course, Projecto em Engenharia Informática 2017/2018
 
-![alt text](http://res.cloudinary.com/ddepgavbp/image/upload/c_scale,h_443,w_275/v1518637285/Captura_de_ecrã_2018-02-14_às_19.39.48.png)![alt text](http://res.cloudinary.com/ddepgavbp/image/upload/c_scale,w_283/v1518637671/Captura_de_ecrã_2018-02-14_às_19.44.37.png)
+![alt text](http://res.cloudinary.com/ddepgavbp/image/upload/c_scale,h_443,w_275/v1518637285/Captura_de_ecrã_2018-02-14_às_19.39.48.png)![alt text](http://res.cloudinary.com/ddepgavbp/image/upload/c_scale,h_440,w_235/v1518638353/Captura_de_ecrã_2018-02-14_às_19.58.28.png)![alt text](http://res.cloudinary.com/ddepgavbp/image/upload/c_scale,w_283/v1518637671/Captura_de_ecrã_2018-02-14_às_19.44.37.png)
+
+
+
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
