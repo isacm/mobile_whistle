@@ -135,7 +135,7 @@ $ npm install react-native-openanything
 $ npm install react-native-maps --save
 ```
 
-#### IOS Setup
+#### iOS Setup
 ```
 Setup your Podfile (found at /ios/Podfile as below, replace all references to _YOUR_PROJECT_TARGET_ with your project target (it's the same as project name by default), and then run pod install while in the ios folder.
 ```
@@ -189,7 +189,9 @@ end
 On the project directory do: 
 
 $ react-native run-android 
+
 or
+
 $ react-native run-ios
 ```
 
