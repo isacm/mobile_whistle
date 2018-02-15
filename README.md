@@ -36,7 +36,6 @@ npm install -g react-native-cli
 ### Simulation Environment setup
 
 #### Enable iOS Simulator (macOS exclusive)
-
 ```
 Open Xcode
 
@@ -48,27 +47,27 @@ Preferences > Locations > Enable Command Line Tools
 Follow instructions here:
 
 facebook.github.io/react-native/docs/getting-started.html
-
 ```
-## Run commands
 
+#### Follow instructions for other installations 
+
+See here : https://facebook.github.io/react-native/docs/getting-started.html
+
+### On first run do the following on the project directory
 ```
 $ cd mobile_whistle/Whistle
 
-Do this only on first run
 $ npm install
-
-$ react-native run-android 
-or
-$ react-native run-ios
 ```
 
-## React Navigation Setup
-```
-npm install --save react-navigation
+### Install third party React-Native libraries
 
+#### React Navigation
 ```
-## Splash Screen Set Up
+$ npm install --save react-navigation
+```
+
+#### Splash Screen Setup
 ```
 • Create required appicon and splashicon on
 ticons.fokkezb.nl
@@ -90,49 +89,50 @@ ticons.fokkezb.nl
 • Android Setup
 
 https://medium.com/handlebar-labs/how-to-add-a-splash-screen-to-a-react-native-app-ios-and-android-30a3cec835ae
-
 ```
 
-## Calendar Setup
+#### Calendar
 ```
-npm install --save react-native-calendars
-
-```
-## Icons Setup
-```
-npm i react-native-vector-icons --save && react-native link react-native-vector-icons
-npm i react-native-elements --save
-```
-## NativeBase Setup
-```
-npm install native-base --save
-react-native link
+$ npm install --save react-native-calendars
 ```
 
-## RadioButton setup
+#### Icons
 ```
-npm i react-native-simple-radio-button --save
-```
-
-## Push Notification
-```
-npm install --save react-native-push-notification
-react-native link
+$ npm i react-native-vector-icons --save && react-native link react-native-vector-icons
+$ npm i react-native-elements --save
 ```
 
-## Open native OS map app
+#### NativeBase
 ```
-npm install --save react-native-open-maps
-```
-
-## Open native OS apps like phone,messages and mail
-```
-npm install react-native-openanything
+$ npm install native-base --save
+$ react-native link
 ```
 
-## Setup maps
+#### RadioButton
 ```
-npm install react-native-maps --save
+$ npm i react-native-simple-radio-button --save
+```
+
+
+#### Push Notification
+```
+$ npm install --save react-native-push-notification
+$ react-native link
+```
+
+#### Open Native OS map application
+```
+$ npm install --save react-native-open-maps
+```
+
+#### Open native OS apps like phone, messages and mail
+```
+$ npm install react-native-openanything
+```
+
+### Maps
+```
+$ npm install react-native-maps --save
 ```
 
 #### IOS Setup
@@ -183,5 +183,33 @@ post_install do |installer|
 end
 ```
 
-#### Setup Android
+## Running the app with the simulator
+
+```
+On the project directory do: 
+
+$ react-native run-android 
+or
+$ react-native run-ios
+```
+
+## Built with
+
+[React-Native](https://facebook.github.io/react-native/) - The framework used
+
+[GitHub](https://github.com) - Version control (Obviously)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
